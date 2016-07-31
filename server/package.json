@@ -1,0 +1,54 @@
+{
+  "name": "carnival-chatbot",
+  "version": "0.0.1",
+  "description": "A chatbot for McGill's winter Carnival",
+  "main": "index.js",
+  "scripts": {
+    "start": "node built/server.js",
+    "dev": "env CCBOT_DB='ccdb-dev' env CCBOT_HOST='159.203.32.219' env CCBOT_USER='ccbot69' env CCBOT_PWD='devpass' env CCBOT_PORT='6969' nodemon src/server.ts --watch 'src/**/*.ts'  --exec 'ts-node'",
+    "stage": "env CCBOT_DB='ccdb-dev' env CCBOT_HOST='159.203.32.219' env CCBOT_USER='ccbot69' env CCBOT_PWD='devpass' env CCBOT_PORT='6969' node src/server.js",
+    "dev-local": "mongod | env CCBOT_DB='ccdb-dev' env CCBOT_HOST='localhost' env CCBOT_PORT='6969' nodemon src/server.ts --watch 'src/**/*.ts'  --exec 'ts-node'",
+    "test": "mongod | env CCBOT_DB='ccdb-test' env CCBOT_USER='ccbot69' env CCBOT_PWD='testpass' env CCBOT_PORT='6868' mocha -w test/testrunner.ts",
+    "test-cover": "mongod | env CCBOT_DB='ccdb-test' env CCBOT_USER='ccbot69' env CCBOT_PWD='testpass' env CCBOT_PORT='6868' istanbul cover node_modules/mocha/bin/_mocha",
+    "build": "tsc",
+    "clean": "rm -rf built",
+    "postinstall": "typings install",
+    "dev:client": " webpack-dev-server --content-base client/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsFrank/carnival-chatbot.git"
+  },
+  "keywords": [
+    "bot",
+    "carnival",
+    "chat"
+  ],
+  "author": "Francis O'Brien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsFrank/carnival-chatbot/issues"
+  },
+  "homepage": "https://github.com/itsFrank/carnival-chatbot#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.13.4",
+    "mongo-express": "^0.30.59",
+    "mongodb": "^2.1.18",
+    "mongoose": "^4.5.3",
+    "q": "^1.4.1",
+    "source-map-support": "^0.4.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
+    "mocha-clean": "^1.0.0",
+    "mocha-mongoose-fix-overwitemodelerror": "^1.0.0",
+    "superagent": "^2.0.0",
+    "supertest": "^1.2.0",
+    "ts-node": "^0.9.3",
+    "typescript": "^1.8.10",
+    "typings": "^1.0.5"
+  }
+}
