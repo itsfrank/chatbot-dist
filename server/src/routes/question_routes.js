@@ -65,7 +65,7 @@ function postQuestion(req, res) {
                     }
                 }
             }
-        }
+        },
     }).then(function (value) {
         if (value.hits.total > 0) {
             for (var _i = 0, _a = value.hits.hits; _i < _a.length; _i++) {
@@ -86,7 +86,19 @@ function postQuestion(req, res) {
             Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured creating a dopcument in es', err);
         });
     }, function (err) {
-        Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured searching es', err);
+        if (err.status == 404) {
+            elasticsearch_1.elasticsearch.create({
+                index: 'questions',
+                type: 'multi',
+                body: q
+            }).then(function (value) {
+                res.send({ id: value._id });
+            }, function (err) {
+                Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured creating a dopcument in es', err);
+            });
+        }
+        else
+            Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured searching es', err);
     });
 }
 function putQuestion(req, res) {

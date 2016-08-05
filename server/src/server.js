@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 //Serve static
 app.use('/', express.static('../client'));
 //mongo-express db manager
-app.use('/mongo_express', mongo_express(mongo_express_config));
+//app.use('/mongo_express', mongo_express(mongo_express_config));
 var router = express.Router();
 //Add routes to app
 routes_1.RouteBinder.bind(router);
