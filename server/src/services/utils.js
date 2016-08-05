@@ -67,6 +67,10 @@ function getFromAlias(alias_array, callback) {
     });
 }
 exports.getFromAlias = getFromAlias;
+function escapeRegex(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+;
 function forAsync(loops, loop, complete) {
     var c = loops - 1;
     var aborted = false;
