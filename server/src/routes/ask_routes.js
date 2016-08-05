@@ -9,7 +9,7 @@ var AskRoutes = (function () {
     return AskRoutes;
 }());
 exports.AskRoutes = AskRoutes;
-var scoreThreshold = 0.3;
+var scoreThreshold = 0.15;
 function askQuestion(req, res) {
     var question = req.query.q;
     if (!question || question == '')
