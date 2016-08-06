@@ -3,7 +3,7 @@ var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
     FacebookRoutes.bind = function (router) {
-        router.get('/webhook', webhook);
+        router.get('/facebook/webhook', webhook);
     };
     return FacebookRoutes;
 }());
