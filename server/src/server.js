@@ -14,6 +14,9 @@ var config_1 = require('./config');
 var app = express();
 var env = process.env.CCBOT_ENV;
 var configs = config_1.Config[env];
+if (!configs) {
+    configs = config_1.Config['production'];
+}
 var mongo_password = configs.mongo.password;
 if (mongo_password && mongo_password.indexOf('::') > -1) {
     var env_var = mongo_password.split('::')[1];
