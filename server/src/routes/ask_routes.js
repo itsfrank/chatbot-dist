@@ -1,5 +1,6 @@
 "use strict";
 var elasticsearch_1 = require('../services/elasticsearch');
+var question_routes_1 = require('./question_routes');
 var AskRoutes = (function () {
     function AskRoutes() {
     }
@@ -17,13 +18,31 @@ function askQuestion(req, res) {
     else {
         elasticsearch_1.elasticsearch.search({
             index: 'questions',
-            type: 'multi',
+            type: question_routes_1.TYPE_NAME,
             body: {
                 "query": {
-                    "match": {
-                        "questions": {
-                            "query": question
-                        }
+                    "bool": {
+                        "filter": {
+                            "match": {
+                                "keywords": {
+                                    "query": question,
+                                    "fuzziness": "1"
+                                }
+                            }
+                        },
+                        "must": [
+                            {
+                                "nested": {
+                                    "path": "questions",
+                                    "score_mode": "max",
+                                    "query": {
+                                        "match": {
+                                            "questions.string": question
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }

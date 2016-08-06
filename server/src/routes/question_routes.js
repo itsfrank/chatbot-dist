@@ -15,10 +15,11 @@ var QuestionRoutes = (function () {
     return QuestionRoutes;
 }());
 exports.QuestionRoutes = QuestionRoutes;
+exports.TYPE_NAME = 'q';
 function getQuestionCollection(req, res) {
     elasticsearch_1.elasticsearch.search({
         index: 'questions',
-        type: 'multi',
+        type: exports.TYPE_NAME,
         body: {
             query: {
                 match_all: {}
@@ -28,7 +29,7 @@ function getQuestionCollection(req, res) {
         var questions = [];
         for (var _i = 0, _a = value.hits.hits; _i < _a.length; _i++) {
             var hit = _a[_i];
-            questions.push(Questions.formatQuestion(hit));
+            questions.push(Questions.hitToQ(hit));
         }
         res.send(questions);
     }, function (err) {
@@ -38,21 +39,23 @@ function getQuestionCollection(req, res) {
 function getQuestion(req, res) {
     elasticsearch_1.elasticsearch.get({
         index: 'questions',
-        type: 'multi',
+        type: exports.TYPE_NAME,
         id: req.params.id
     }).then(function (value) {
         if (!value.found) {
             Utils.sendError(res, 404, 'not found', 'question', 'no question with id exists', value);
         }
         else {
-            res.send(Questions.formatQuestion(value));
+            var q = Questions.hitToQ(value);
+            console.log(q);
+            res.send(q);
         }
     }, function (err) {
         Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured searching es', err);
     });
 }
 function postQuestion(req, res) {
-    var q = req.body;
+    var q = Questions.qToDoc(req.body);
     elasticsearch_1.elasticsearch.search({
         index: 'questions',
         type: "multi",
@@ -71,14 +74,14 @@ function postQuestion(req, res) {
             for (var _i = 0, _a = value.hits.hits; _i < _a.length; _i++) {
                 var hit = _a[_i];
                 if (q.name == hit._source.name) {
-                    Utils.sendError(res, 409, 'conflict', 'name', 'a question with the same name already exists', Questions.formatQuestion(hit));
+                    Utils.sendError(res, 409, 'conflict', 'name', 'a question with the same name already exists', Questions.hitToQ(hit));
                     return;
                 }
             }
         }
         elasticsearch_1.elasticsearch.create({
             index: 'questions',
-            type: 'multi',
+            type: exports.TYPE_NAME,
             body: q
         }).then(function (value) {
             res.send({ id: value._id });
@@ -89,7 +92,7 @@ function postQuestion(req, res) {
         if (err.status == 404) {
             elasticsearch_1.elasticsearch.create({
                 index: 'questions',
-                type: 'multi',
+                type: exports.TYPE_NAME,
                 body: q
             }).then(function (value) {
                 res.send({ id: value._id });
@@ -102,12 +105,7 @@ function postQuestion(req, res) {
     });
 }
 function putQuestion(req, res) {
-    var q = req.body;
-    for (var key in q) {
-        if (key.indexOf('_') == 0) {
-            delete q[key];
-        }
-    }
+    var q = Questions.qToDoc(req.body);
     elasticsearch_1.elasticsearch.search({
         index: 'questions',
         type: "multi",
@@ -126,14 +124,14 @@ function putQuestion(req, res) {
             for (var _i = 0, _a = value.hits.hits; _i < _a.length; _i++) {
                 var hit = _a[_i];
                 if (q.name == hit._source.name && req.params.id != hit._id) {
-                    Utils.sendError(res, 409, 'conflict', 'name', 'a question with the same name already exists', Questions.formatQuestion(hit));
+                    Utils.sendError(res, 409, 'conflict', 'name', 'a question with the same name already exists', Questions.hitToQ(hit));
                     return;
                 }
             }
         }
         elasticsearch_1.elasticsearch.update({
             index: 'questions',
-            type: 'multi',
+            type: exports.TYPE_NAME,
             id: req.params.id,
             body: { doc: q }
         }).then(function (value) {
@@ -148,7 +146,7 @@ function putQuestion(req, res) {
 function deleteQuestion(req, res) {
     elasticsearch_1.elasticsearch.delete({
         index: 'questions',
-        type: 'multi',
+        type: exports.TYPE_NAME,
         id: req.params.id
     }).then(function (value) {
         res.sendStatus(200);

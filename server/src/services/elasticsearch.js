@@ -17,19 +17,9 @@ function pingWait(done) {
         }
         else {
             console.log('elasticsearch is connected');
-            setMappings();
             done();
         }
     });
 }
 exports.pingWait = pingWait;
-function setMappings() {
-    exports.elasticsearch.indices.putMapping({
-        index: 'questions',
-        type: 'multi',
-        body: {
-            mappings: {}
-        }
-    });
-}
 //# sourceMappingURL=elasticsearch.js.map
