@@ -47,7 +47,12 @@ if (configs.ssl) {
     // sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/priv ate/node-selfsigned.key -out /etc/ssl/certs/node-selfsigned.crt
     https.createServer({
         key: fs.readFileSync(configs.ssl.key_path),
-        cert: fs.readFileSync(configs.ssl.cert_path)
+        cert: fs.readFileSync(configs.ssl.cert_path),
+        ca: [
+            fs.readFileSync(configs.ssl.ca1),
+            fs.readFileSync(configs.ssl.ca2),
+            fs.readFileSync(configs.ssl.ca3)
+        ]
     }, app).listen(configs.ssl.https_port);
 }
 server.on("error", function (error) {

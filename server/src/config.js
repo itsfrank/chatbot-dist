@@ -82,7 +82,10 @@ exports.Config = {
         },
         ssl: {
             key_path: '/etc/froshbot/froshbot.com.key',
-            cert_path: '/etc/froshbot/froshbot.com.bundle.crt',
+            cert_path: '/etc/froshbot/froshbot.com.crt',
+            ca1: '/etc/froshbot/com1.crt',
+            ca2: '/etc/froshbot/com2.crt',
+            ca3: '/etc/froshbot/com3.crt',
             https_port: 443
         }
     }
