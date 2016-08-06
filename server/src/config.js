@@ -81,8 +81,8 @@ exports.Config = {
             loglevel: 'trace'
         },
         ssl: {
-            key_path: '/etc/ssl/private/node-selfsigned.key',
-            cert_path: '/etc/ssl/certs/node-selfsigned.crt',
+            key_path: '/etc/froshbot/froshbot.com.key',
+            cert_path: '/etc/froshbot/froshbot.com.crt',
             https_port: 443
         }
     }
