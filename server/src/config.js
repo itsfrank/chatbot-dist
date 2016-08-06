@@ -81,7 +81,7 @@ exports.Config = {
             loglevel: 'trace'
         },
         ssl: {
-            key_path: '/etc/ssl/priv ate/node-selfsigned.key',
+            key_path: '/etc/ssl/private/node-selfsigned.key',
             cert_path: '/etc/ssl/certs/node-selfsigned.crt',
             https_port: 443
         }
