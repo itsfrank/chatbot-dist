@@ -12,9 +12,13 @@ var AskRoutes = (function () {
 exports.AskRoutes = AskRoutes;
 var scoreThreshold = 0.15;
 function askQuestion(req, res) {
-    var question = req.query.q;
+    questionResponse(req.query.q, function (response) {
+        res.send(response);
+    });
+}
+function questionResponse(question, callback) {
     if (!question || question == '')
-        res.send('You must ask a question!');
+        callback('You must ask a question!');
     else {
         elasticsearch_1.elasticsearch.search({
             index: 'questions',
@@ -48,17 +52,18 @@ function askQuestion(req, res) {
             }
         }).then(function (value) {
             if (value.hits.total == 0 || value.hits.max_score < scoreThreshold) {
-                res.send('I\'m sorry, I don\'t know how to awnser this question unfortunately');
+                callback('I\'m sorry, I don\'t know how to awnser this question unfortunately');
             }
             else {
-                res.send(value.hits.hits[0]._source.response);
+                callback(value.hits.hits[0]._source.response);
             }
         }, function (err) {
             console.log(err);
-            res.send('I\'m sorry, there was an error in my server, try asking again or contact an admin');
+            callback('I\'m sorry, there was an error in my server, try asking again or contact an admin');
         });
     }
 }
+exports.questionResponse = questionResponse;
 // function respondToQuestion(req:Request, res:Response) {
 //     var question = req.query['q'].toLowerCase();
 //     var alias = WordsService.findAliasInString(question);
