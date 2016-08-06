@@ -1,4 +1,6 @@
 "use strict";
+var fs = require('fs');
+var https = require('https');
 var express = require('express');
 var bodyParser = require('body-parser');
 var elasticsearch = require('./services/elasticsearch');
@@ -39,9 +41,15 @@ routes_1.RouteBinder.bind(router);
 app.use('/cbot', router);
 words_1.WordsService.reloadWords();
 var server = app.listen(configs.server.port, function () {
-    var address = server.address().address;
-    console.log('Listening on ' + address + ":" + configs.server.port);
+    console.log('Listening on port ' + configs.server.port);
 });
+if (configs.ssl) {
+    // sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/priv ate/node-selfsigned.key -out /etc/ssl/certs/node-selfsigned.crt
+    https.createServer({
+        key: fs.readFileSync(configs.ssl.key_path),
+        cert: fs.readFileSync(configs.ssl.cert_path)
+    }, app).listen(configs.ssl.https_port);
+}
 server.on("error", function (error) {
     if (error.syscall !== "listen") {
         throw error;
@@ -63,5 +71,4 @@ server.on("error", function (error) {
             throw error;
     }
 });
-exports.server_obj = server;
 //# sourceMappingURL=server.js.map

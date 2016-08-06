@@ -79,18 +79,13 @@ exports.Config = {
             host: 'localhost',
             port: 9200,
             loglevel: 'trace'
+        },
+        ssl: {
+            key_path: '/etc/ssl/priv ate/node-selfsigned.key',
+            cert_path: '/etc/ssl/certs/node-selfsigned.crt',
+            https_port: 443
         }
     }
 };
-// "start": "node built/server.js",
-// "dev": "env CCBOT_DB='ccdb-dev' env CCBOT_HOST='159.203.32.219' env CCBOT_username='ccbot69' env CCBOT_PWD='devpass' env CCBOT_PORT='6969' nodemon src/server.ts --watch 'src/**/*.ts'  --exec 'ts-node'",
-// "dev-local": "mongod | env CCBOT_DB='ccdb-dev' env CCBOT_HOST='localhost' env CCBOT_PORT='6969' nodemon src/server.ts --watch 'src/**/*.ts'  --exec 'ts-node'",
-// "test": "mongod | env CCBOT_DB='ccdb-test' env CCBOT_username='ccbot69' env CCBOT_PWD='testpass' env CCBOT_PORT='6868' mocha -w test/testrunner.ts",
-// "test-cover": "mongod | env CCBOT_DB='ccdb-test' env CCBOT_username='ccbot69' env CCBOT_PWD='testpass' env CCBOT_PORT='6868' istanbul cover node_modules/mocha/bin/_mocha",
-// "build": "tsc",
-// "clean": "rm -rf built",
-// "postinstall": "typings install",
-// "dev:client": " webpack-dev-server --content-base client/"
-// "stage": "env CCBOT_DB='ccdb-dev' env CCBOT_HOST='159.203.32.219' env CCBOT_username='ccbot69' env CCBOT_PWD='devpass' env CCBOT_PORT='6969' node src/server.js",
-// "prod-test": "env CCBOT_DB='ccdb-dev' env CCBOT_HOST='localhost' env CCBOT_username='ccbot69' env CCBOT_PWD='devpass' env CCBOT_PORT='80' node src/server.js",
+// sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/priv ate/node-selfsigned.key -out /etc/ssl/certs/node-selfsigned.crt
 //# sourceMappingURL=config.js.map
