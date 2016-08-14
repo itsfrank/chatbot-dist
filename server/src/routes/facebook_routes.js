@@ -84,13 +84,13 @@ function sendTextMessage(faculty, recipientId, messageText) {
                 text: response
             }
         };
-        callSendAPI(messageData);
+        callSendAPI(faculty, messageData);
     });
 }
-function callSendAPI(messageData) {
+function callSendAPI(faculty, messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: PAGE_TOKEN },
+        qs: { access_token: Faculties.FacultyMap.facebook.tokens[faculty] },
         method: 'POST',
         json: messageData
     }, function (error, response, body) {
