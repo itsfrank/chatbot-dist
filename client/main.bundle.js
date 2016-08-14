@@ -20,31 +20,46 @@ webpackJsonp([0,1],[
 	__webpack_require__(8);
 	__webpack_require__(34);
 	__webpack_require__(91);
-	var question_1 = __webpack_require__(93);
-	var home_1 = __webpack_require__(95);
-	var login_1 = __webpack_require__(99);
-	var dashboard_1 = __webpack_require__(103);
-	var dashhome_1 = __webpack_require__(107);
-	var questions_1 = __webpack_require__(111);
-	var question_list_1 = __webpack_require__(113);
-	var question_new_1 = __webpack_require__(117);
-	var question_info_1 = __webpack_require__(121);
-	var question_edit_1 = __webpack_require__(125);
-	var data_1 = __webpack_require__(129);
-	var overview_1 = __webpack_require__(131);
-	var events_1 = __webpack_require__(133);
-	var new_event_1 = __webpack_require__(137);
-	var event_info_1 = __webpack_require__(141);
-	var venues_1 = __webpack_require__(145);
-	var new_venue_1 = __webpack_require__(149);
-	var venue_info_1 = __webpack_require__(153);
-	var exact_question_new_1 = __webpack_require__(157);
-	var _404_1 = __webpack_require__(162);
+	var faculties_1 = __webpack_require__(93);
+	var question_1 = __webpack_require__(97);
+	var home_1 = __webpack_require__(99);
+	var login_1 = __webpack_require__(103);
+	var dashboard_1 = __webpack_require__(107);
+	var dashhome_1 = __webpack_require__(111);
+	var questions_1 = __webpack_require__(115);
+	var question_list_1 = __webpack_require__(117);
+	var question_new_1 = __webpack_require__(121);
+	var question_info_1 = __webpack_require__(125);
+	var question_edit_1 = __webpack_require__(129);
+	var data_1 = __webpack_require__(133);
+	var overview_1 = __webpack_require__(135);
+	var events_1 = __webpack_require__(137);
+	var new_event_1 = __webpack_require__(141);
+	var event_info_1 = __webpack_require__(145);
+	var venues_1 = __webpack_require__(149);
+	var new_venue_1 = __webpack_require__(153);
+	var venue_info_1 = __webpack_require__(157);
+	var exact_question_new_1 = __webpack_require__(161);
+	var _404_1 = __webpack_require__(166);
 	var app = Vue.extend({});
 	var router = new VueRouter();
 	router.map({
 	    '/': {
-	        component: question_1.QuestionState,
+	        component: function () {
+	            var parts = location.hostname.split('.');
+	            if (parts.length < 3) {
+	                return faculties_1.FacultiesView;
+	            }
+	            else {
+	                var subdomain = parts.shift();
+	                if (subdomain == 'science' || subdomain == 'management') {
+	                    return question_1.QuestionState;
+	                }
+	                else {
+	                    return faculties_1.FacultiesView;
+	                }
+	            }
+	        }(),
 	        subRoutes: {
 	            '/': {
 	                component: home_1.HomeView
@@ -40763,6 +40778,90 @@ webpackJsonp([0,1],[
 /* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var vue_typescript_1 = __webpack_require__(36);
+	var FacultiesView = (function (_super) {
+	    __extends(FacultiesView, _super);
+	    function FacultiesView() {
+	        _super.apply(this, arguments);
+	    }
+	    FacultiesView = __decorate([
+	        vue_typescript_1.VueComponent({
+	            template: __webpack_require__(94),
+	            style: __webpack_require__(95)
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], FacultiesView);
+	    return FacultiesView;
+	}(Vue));
+	exports.FacultiesView = FacultiesView;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 94 */
+/***/ function(module, exports) {
+
+	module.exports = "<div id=\"ccb-home-view\" class=\"container\">\r\n    <header>\r\n        <h2>Hello, I'm</h2><h1 class=\"font-bluejeans-dark\"> Froshbot!</h1>\r\n        <h3>What faculty are you in?</h3>\r\n    </header>\r\n    <main class=\"fac-main\">\r\n        <a href=\"http://management.froshbot.com\"><h2>Management</h2></a>\r\n        <a href=\"http://science.froshbot.com\"><h2 class=\"font-bluejeans-light\">Science</h2></a>\r\n    </main>\r\n</div>"
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(96);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(17)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./faculties.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./faculties.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
 	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40779,7 +40878,7 @@ webpackJsonp([0,1],[
 	    }
 	    QuestionState = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(94)
+	            template: __webpack_require__(98)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionState);
@@ -40789,13 +40888,13 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 94 */
+/* 98 */
 /***/ function(module, exports) {
 
 	module.exports = "<ccb-navbar myvar=\"HELOOO\"></ccb-navbar>\r\n<router-view>loading...</router-view>"
 
 /***/ },
-/* 95 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -40821,6 +40920,7 @@ webpackJsonp([0,1],[
 	        //Data
 	        this.response_text = 'My anwser will appear here!';
 	        this.question_text = '';
+	        this.faculty = '';
 	    }
 	    //Methods
 	    HomeView.prototype.ask = function () {
@@ -40834,10 +40934,15 @@ webpackJsonp([0,1],[
 	            this.response_text = "Sorry, there was an error processing your question, please try again in a few moments.";
 	        });
 	    };
+	    HomeView.prototype.ready = function () {
+	        var parts = location.hostname.split('.');
+	        var subdomain = parts.shift();
+	        this.faculty = subdomain.charAt(0).toUpperCase() + subdomain.substring(1);
+	    };
 	    HomeView = __decorate([
 	        vue_typescript_1.VueComponent('ccb-home-view', {
-	            template: __webpack_require__(96),
-	            style: __webpack_require__(97)
+	            template: __webpack_require__(100),
+	            style: __webpack_require__(101)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], HomeView);
@@ -40848,19 +40953,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 96 */
+/* 100 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"ccb-home-view\" class=\"container\">\r\n    <header>\r\n        <h2>Hello, I'm</h2><h1 class=\"font-bluejeans-dark\"> Froshbot!</h1>\r\n        <h3>Ask me anything about frosh and i'll do my best to answer you</h3>\r\n    </header>\r\n    <main>\r\n        <div class=\"input-group\">\r\n            <input v-model=\"question_text\" v-on:keyup.enter=\"ask()\" type=\"text\" placeholder=\"type your question here\" class=\"form-control\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"ask()\" class=\"btn btn-primary\">Ask!</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well\">\r\n            {{{response_text}}}\r\n        </div>\r\n    </main>\r\n</div>"
+	module.exports = "<div id=\"ccb-home-view\" class=\"container\">\r\n    <header>\r\n        <h2>Hello, I'm</h2><h1 class=\"font-bluejeans-dark\"> {{faculty}} Froshbot!</h1>\r\n        <h3>Ask me anything about frosh and i'll do my best to answer you</h3>\r\n    </header>\r\n    <main>\r\n        <div class=\"input-group\">\r\n            <input v-model=\"question_text\" v-on:keyup.enter=\"ask()\" type=\"text\" placeholder=\"type your question here\" class=\"form-control\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"ask()\" class=\"btn btn-primary\">Ask!</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well\">\r\n            {{{response_text}}}\r\n        </div>\r\n    </main>\r\n</div>"
 
 /***/ },
-/* 97 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(98);
+	var content = __webpack_require__(102);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -40880,7 +40985,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 98 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -40894,7 +40999,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 99 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -40923,8 +41028,8 @@ webpackJsonp([0,1],[
 	    };
 	    LoginView = __decorate([
 	        vue_typescript_1.VueComponent('ccb-login-view', {
-	            template: __webpack_require__(100),
-	            style: __webpack_require__(101)
+	            template: __webpack_require__(104),
+	            style: __webpack_require__(105)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], LoginView);
@@ -40935,19 +41040,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 100 */
+/* 104 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-login-view\">\r\n\r\n    <div class=\"container\">\r\n        <p>This page is meant for developers and admins of the application. If you don't fit in one of these categories, don't waste your time on this page! Go back with your group and enjoy your frosh!</p>\r\n        <div class=\"login-box\">\r\n            <form>\r\n                <div class=\"form-group row\">\r\n                    <label class=\"col-sm-2 form-control-label\">Email</label>\r\n                    <div class=\"col-sm-10\">\r\n                        <input type=\"email\" class=\"form-control\" placeholder=\"Email\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group row\">\r\n                    <label for=\"inputPassword3\" class=\"col-sm-2 form-control-label\">Password</label>\r\n                    <div class=\"col-sm-10\">\r\n                        <input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-offset-2 col-sm-10\">\r\n                        <button v-on:click=\"toDash()\" class=\"btn btn-secondary pull-xs-right\">Sign in</button>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 101 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(102);
+	var content = __webpack_require__(106);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -40967,7 +41072,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 102 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -40981,7 +41086,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 103 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41000,8 +41105,8 @@ webpackJsonp([0,1],[
 	    }
 	    DashboardState = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(104),
-	            style: __webpack_require__(105)
+	            template: __webpack_require__(108),
+	            style: __webpack_require__(109)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DashboardState);
@@ -41011,19 +41116,19 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 104 */
+/* 108 */
 /***/ function(module, exports) {
 
 	module.exports = "<dash-navbar myvar=\"HELOOO\"></dash-navbar>\r\n<router-view>loading...</router-view>"
 
 /***/ },
-/* 105 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(106);
+	var content = __webpack_require__(110);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41043,7 +41148,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 106 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41057,7 +41162,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 107 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41087,8 +41192,8 @@ webpackJsonp([0,1],[
 	    }
 	    DashHome = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(108),
-	            style: __webpack_require__(109)
+	            template: __webpack_require__(112),
+	            style: __webpack_require__(113)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DashHome);
@@ -41099,19 +41204,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 108 */
+/* 112 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-dashhome-view\">\r\n    <sidenav :links=\"sidenav_links\">\r\n        <div class=\"container\">\r\n            coming soon...\r\n        </div>\r\n    </sidenav>\r\n</div>"
 
 /***/ },
-/* 109 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(110);
+	var content = __webpack_require__(114);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41131,7 +41236,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 110 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41145,7 +41250,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 111 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41181,7 +41286,7 @@ webpackJsonp([0,1],[
 	    };
 	    QuestionsView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(112)
+	            template: __webpack_require__(116)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionsView);
@@ -41192,13 +41297,13 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 112 */
+/* 116 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-dashhome-view\">\r\n    <sidenav \r\n        :links=\"sidenavLinks\"\r\n        :active-strategy=\"sidenavActiveStrat\"\r\n    >\r\n        <div class=\"container-fluid dash-content\">\r\n            <router-view></router-view>\r\n        </div>\r\n    </sidenav>\r\n</div>"
 
 /***/ },
-/* 113 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41235,8 +41340,8 @@ webpackJsonp([0,1],[
 	    };
 	    QuestionListView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(114),
-	            style: __webpack_require__(115)
+	            template: __webpack_require__(118),
+	            style: __webpack_require__(119)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionListView);
@@ -41247,19 +41352,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 114 */
+/* 118 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-questions-list-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Questions</h3>\r\n            <button v-link=\"{path : '/dashboard/questions/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Question</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <data-list\r\n            :data=\"questions\"\r\n            type=\"questions\"\r\n            base-path=\"/dashboard/questions/\"\r\n        >\r\n        </data-list>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 115 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(116);
+	var content = __webpack_require__(120);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41279,7 +41384,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 116 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41293,7 +41398,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 117 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue, $) {"use strict";
@@ -41411,8 +41516,8 @@ webpackJsonp([0,1],[
 	    };
 	    QuestionNewView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(118),
-	            style: __webpack_require__(119)
+	            template: __webpack_require__(122),
+	            style: __webpack_require__(123)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionNewView);
@@ -41423,19 +41528,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
 
 /***/ },
-/* 118 */
+/* 122 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-new-exact-question-container\">\r\n    <h3>New Question</h3>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <label>Question Name</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        class=\"form-control\"\r\n        placeholder=\"name\"\r\n        v-model=\"question.name\"\r\n    >\r\n    \r\n    <div class=\"h-margin\"></div>\r\n\r\n    <div class=\"keywords-section\">\r\n        <label>Keywords</label>\r\n        <div class=\"input-group\">\r\n            <input v-model:bind=\"keywordInput\" v-on:keyup.enter=\"addKeyword()\" class=\"form-control\" placeholder=\"add a keyword\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addKeyword()\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span v-if=\"question.keywords.length == 0\">\r\n                no keywords\r\n            </span>\r\n            <span v-for=\"keyword in question.keywords\" class=\"label label-primary\">\r\n                {{keyword}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeKeyword(keyword)\" class=\"fa fa-times kw-x\"></i>\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Questions</label>&nbsp;&nbsp;&nbsp;\r\n    <tool-tipz v-on:click=\"infoclick()\">\r\n        <span slot=\"hover\"><i class=\"fa fa-question type-tooltip\"></i></span>\r\n        <span slot=\"content\">\r\n            click to learn more about question matching\r\n        </span>\r\n    </tool-tipz>\r\n    <div class=\"input-group alias-input\">\r\n        <input v-model:bind=\"questionInput\" v-on:keyup.enter=\"addQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add a question\">\r\n        <div class=\"input-group-btn\">\r\n            <button v-on:click=\"addQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n        </div>\r\n    </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <ul class=\"list-group q-list\">\r\n            <li v-for=\"q in question.questions\" class=\"list-group-item q-content\">\r\n                {{q}}?\r\n                <span class=\"q-remove pull-right\"><i v-on:click=\"removeQuestion(q)\" class=\"fa fa-times\"></i></span>\r\n            </li>\r\n        </ul>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Response</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"question response\"\r\n        v-model=\"question.response\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <button v-on:click=\"saveQuestion\" class=\"btn btn-success\">Save Question</button>\r\n\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <error-success\r\n        :error-message=\"errorMessage\"\r\n        :success-message=\"successMessage\"\r\n    ></error-success>\r\n\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <div v-show=\"sdInfoOpen\" id=\"sdinfo\">\r\n        <div class=\"well bg-lightgray-dark\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-6\">\r\n                    <h4>Matching Info</h4>\r\n                </div>\r\n                <div class=\"col-xs-6\">\r\n                    <span v-on:click=\"sdInfoOpen = false\" class=\"info-close\">close <i class=\"fa fa-times\"></i></span>\r\n                </div>\r\n            </div>\r\n            <label>Matches</label>\r\n            <p>Matches are what determines if the user asked this specific question or not. Since ther are many ways to ask the same question; here, we have many ways to match a specific question. When a question is asked, the bot will check if it matches any of the question-matches set above, if it does, then it will reply with the given response</p>\r\n            <label>Static</label>\r\n            <p>A static match is just exact words. I will compare the question with the match ignoring both the case (capitalisation) and the questionmark. If the question matches exactly the match, it will reply with the response.</p>\r\n            <p>Example: 'What is my name?' will match:</p>\r\n            <ul>\r\n                <li>'what is my name?'</li>\r\n                <li>'What IS MY NaMe'</li>\r\n            </ul>\r\n            <label>Dynamic</label>\r\n            <p>Dynamic matches use Regular Expressions to match question, which means that you can put symbols in the match and create complex behaviours</p>\r\n            <p>Some Useful constructs:</p>\r\n            <ul>\r\n                <li><strong>(one|other)</strong> - will match either 'one' or 'other' in the place where it is set</li>\r\n                Example: 'Can i drink (soda|beer|maple syrup)' will match:\r\n                <ul>\r\n                    <li>can i drink beer</li>\r\n                    <li>Can i drink SODA?</li>\r\n                    <li>Can i drink maple syrup</li>\r\n                </ul>\r\n                <li><strong><strong>.*</strong></strong> - will match any number of characters</li>\r\n                Example: 'Is beachday .* fun?' will match:\r\n                <ul>\r\n                    <li>is beachday super fun</li>\r\n                    <li>is beachday super duper fun</li>\r\n                <strong>But Not</strong>\r\n                    <li>is beachday fun</li>\r\n                        this is because it expects two spaces around the '.*', removing one of the spaces in the match would make it work with the above example\r\n                </ul>\r\n                '.*hello.*' will match anything that contains 'hello'\r\n            </ul>\r\n            <p>Click <a href=\"http://www.zytrax.com/tech/web/regex.htm#search\">here</a> for a full guide on regular expressions</p>\r\n            <p>Or <a href=\"https://www.cheatography.com/davechild/cheat-sheets/regular-expressions/\">here</a> for a regular expression cheat sheet</p>\r\n\r\n            <strong>WARNING</strong>\r\n            <p>Regular expressions are very powerful, but also quite difficult to master, be very careful when using the '*' quantifier, it will open the possibility of matching a large ammout of questions. For example, if you put '.*' as a match, literally any sequence of character will match to it. This will make it so that none of the data object will ever be matched.</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 119 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(120);
+	var content = __webpack_require__(124);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41455,7 +41560,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 120 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41469,7 +41574,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 121 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41520,8 +41625,8 @@ webpackJsonp([0,1],[
 	    };
 	    QuestionInfoView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(122),
-	            style: __webpack_require__(123)
+	            template: __webpack_require__(126),
+	            style: __webpack_require__(127)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionInfoView);
@@ -41532,19 +41637,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 122 */
+/* 126 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-question-info-container\">\r\n    <error-success\r\n        :error-message=\"errorMessage\"\r\n        :success-message=\"successMessage\"\r\n    ></error-success>\r\n\r\n    <h3>{{question.name}}</h3>\r\n    \r\n    <button v-on:click=\"$broadcast('delete-question:show')\" class=\"btn btn-danger pull-right\">\r\n        <strong>Delete</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-times\"></i>\r\n    </button>\r\n    <button v-link=\"{path : '/dashboard/questions/' + this.question._id + '/edit'}\"  class=\"btn btn-primary pull-right\">\r\n        <strong>Edit</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-pencil\"></i>\r\n    </button>\r\n\r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <div class=\"keywords-section\">\r\n        <label>Keywords</label>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span v-if=\"question.keywords.length == 0\">\r\n                no keywords\r\n            </span>\r\n            <span v-for=\"keyword in question.keywords\" class=\"label label-primary\">\r\n                {{keyword}}\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <label>Questions</label>&nbsp;&nbsp;&nbsp;\r\n    <div class=\"h-margin-sm\"></div>\r\n    <ul class=\"list-group q-list\">\r\n        <li v-for=\"q in question.questions\" class=\"list-group-item q-content\">\r\n            {{q}}?\r\n        </li>\r\n    </ul>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Response</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <div class=\"well\">{{question.response}}</div>\r\n\r\n    <modal\r\n        name=\"delete-question\"\r\n    >\r\n        <div slot=\"header\"><strong>Delete Question</strong></div>\r\n        <div slot=\"body\">\r\n            <span v-if=\"!deleted\">Are you sure you want to delete this question?</span>\r\n            <span v-if=\"deleted\">Question deleted successfully</span>\r\n        </div>\r\n        <div slot=\"footer\">\r\n            <button v-if=\"!deleted\"  v-on:click=\"$broadcast('delete-question:hide')\" class=\"btn\">Cancel</button>\r\n            <button v-if=\"!deleted\"  v-on:click=\"deleteQuestion\" class=\"btn btn-danger\">Delete</button>\r\n            <button v-if=\"deleted\" v-on:click=\"$router.go('/dashboard/questions')\" class=\"btn btn-success\">Continue</button>\r\n        </div>\r\n    </modal>    \r\n</div>"
 
 /***/ },
-/* 123 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(124);
+	var content = __webpack_require__(128);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41564,7 +41669,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 124 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41578,7 +41683,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 125 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue, $) {"use strict";
@@ -41685,8 +41790,8 @@ webpackJsonp([0,1],[
 	    };
 	    QuestionEditView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(126),
-	            style: __webpack_require__(127)
+	            template: __webpack_require__(130),
+	            style: __webpack_require__(131)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], QuestionEditView);
@@ -41697,19 +41802,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
 
 /***/ },
-/* 126 */
+/* 130 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-question-edit-container\">\r\n    <h3>Edit Question</h3>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <label>Question Name</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"name\"\r\n        v-model=\"question.name\"\r\n    >\r\n\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <div class=\"keywords-section\">\r\n        <label>Keywords</label>\r\n        <div class=\"input-group\">\r\n            <input v-model:bind=\"keywordInput\" v-on:keyup.enter=\"addKeyword()\" class=\"form-control\" placeholder=\"add a keyword\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addKeyword()\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span v-if=\"question.keywords.length == 0\">\r\n                no keywords\r\n            </span>\r\n            <span v-for=\"keyword in question.keywords\" class=\"label label-primary\">\r\n                {{keyword}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeKeyword(keyword)\" class=\"fa fa-times kw-x\"></i>\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Questions</label>&nbsp;&nbsp;&nbsp;\r\n    <tool-tipz v-on:click=\"infoclick()\">\r\n        <span slot=\"hover\"><i class=\"fa fa-question type-tooltip\"></i></span>\r\n        <span slot=\"content\">\r\n            click to learn more about question matching\r\n        </span>\r\n    </tool-tipz>\r\n    <div class=\"input-group alias-input\">\r\n        <input v-model:bind=\"questionInput\" v-on:keyup.enter=\"addQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add a question\">\r\n        <div class=\"input-group-btn\">\r\n            <button v-on:click=\"addQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n        </div>\r\n    </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <ul class=\"list-group q-list\">\r\n            <li v-for=\"q in question.questions\" class=\"list-group-item q-content\">\r\n                {{q}}?\r\n                <span class=\"q-remove pull-right\"><i v-on:click=\"removeQuestion(q)\" class=\"fa fa-times\"></i></span>\r\n            </li>\r\n        </ul>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Response</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"question response\"\r\n        v-model=\"question.response\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <button v-on:click=\"saveQuestion\" class=\"btn btn-success\">Save Question</button>\r\n\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <error-success\r\n        :error-message=\"errorMessage\"\r\n        :success-message=\"successMessage\"\r\n    ></error-success>\r\n\r\n    <div class=\"h-margin\"></div>\r\n\r\n    <div v-show=\"sdInfoOpen\" id=\"sdinfo\">\r\n        <div class=\"well bg-lightgray-dark\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-6\">\r\n                    <h4>Matching Info</h4>\r\n                </div>\r\n                <div class=\"col-xs-6\">\r\n                    <span v-on:click=\"sdInfoOpen = false\" class=\"info-close\">close <i class=\"fa fa-times\"></i></span>\r\n                </div>\r\n            </div>\r\n            <label>Matches</label>\r\n            <p>Matches are what determines if the user asked this specific question or not. Since ther are many ways to ask the same question; here, we have many ways to match a specific question. When a question is asked, the bot will check if it matches any of the question-matches set above, if it does, then it will reply with the given response</p>\r\n            <label>Static</label>\r\n            <p>A static match is just exact words. I will compare the question with the match ignoring both the case (capitalisation) and the questionmark. If the question matches exactly the match, it will reply with the response.</p>\r\n            <p>Example: 'What is my name?' will match:</p>\r\n            <ul>\r\n                <li>'what is my name?'</li>\r\n                <li>'What IS MY NaMe'</li>\r\n            </ul>\r\n            <label>Dynamic</label>\r\n            <p>Dynamic matches use Regular Expressions to match question, which means that you can put symbols in the match and create complex behaviours</p>\r\n            <p>Some Useful constructs:</p>\r\n            <ul>\r\n                <li><strong>(one|other)</strong> - will match either 'one' or 'other' in the place where it is set</li>\r\n                Example: 'Can i drink (soda|beer|maple syrup)' will match:\r\n                <ul>\r\n                    <li>can i drink beer</li>\r\n                    <li>Can i drink SODA?</li>\r\n                    <li>Can i drink maple syrup</li>\r\n                </ul>\r\n                <li><strong><strong>.*</strong></strong> - will match any number of characters</li>\r\n                Example: 'Is beachday .* fun?' will match:\r\n                <ul>\r\n                    <li>is beachday super fun</li>\r\n                    <li>is beachday super duper fun</li>\r\n                <strong>But Not</strong>\r\n                    <li>is beachday fun</li>\r\n                        this is because it expects two spaces around the '.*', removing one of the spaces in the match would make it work with the above example\r\n                </ul>\r\n                '.*hello.*' will match anything that contains 'hello'\r\n            </ul>\r\n            <p>Click <a href=\"http://www.zytrax.com/tech/web/regex.htm#search\">here</a> for a full guide on regular expressions</p>\r\n            <p>Or <a href=\"https://www.cheatography.com/davechild/cheat-sheets/regular-expressions/\">here</a> for a regular expression cheat sheet</p>\r\n\r\n            <strong>WARNING</strong>\r\n            <p>Regular expressions are very powerful, but also quite difficult to master, be very careful when using the '*' quantifier, it will open the possibility of matching a large ammout of questions. For example, if you put '.*' as a match, literally any sequence of character will match to it. This will make it so that none of the data object will ever be matched.</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 127 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(128);
+	var content = __webpack_require__(132);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41729,7 +41834,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 128 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41743,7 +41848,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 129 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41782,7 +41887,7 @@ webpackJsonp([0,1],[
 	    };
 	    DataView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(130)
+	            template: __webpack_require__(134)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DataView);
@@ -41793,13 +41898,13 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 130 */
+/* 134 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-dashhome-view\">\r\n    <sidenav \r\n        :links=\"sidenavLinks\"\r\n        :active-strategy=\"sidenavActiveStrat\"\r\n    >\r\n        <div class=\"container\">\r\n            <router-view></router-view>\r\n        </div>\r\n    </sidenav>\r\n</div>"
 
 /***/ },
-/* 131 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41825,7 +41930,7 @@ webpackJsonp([0,1],[
 	    }
 	    DataOverview = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(132)
+	            template: __webpack_require__(136)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DataOverview);
@@ -41836,13 +41941,13 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 132 */
+/* 136 */
 /***/ function(module, exports) {
 
 	module.exports = "overview"
 
 /***/ },
-/* 133 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -41876,8 +41981,8 @@ webpackJsonp([0,1],[
 	    };
 	    DataEvents = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(134),
-	            style: __webpack_require__(135)
+	            template: __webpack_require__(138),
+	            style: __webpack_require__(139)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DataEvents);
@@ -41888,19 +41993,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 134 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-events-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Events</h3>\r\n            <button v-link=\"{path : '/dashboard/data/events/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Event</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <event-datalist\r\n            :events=\"events\"\r\n        ></event-datalist>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 135 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(136);
+	var content = __webpack_require__(140);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -41920,7 +42025,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 136 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -41934,7 +42039,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 137 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -42283,8 +42388,8 @@ webpackJsonp([0,1],[
 	    ], NewEventView.prototype, "addressChanged", null);
 	    NewEventView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(138),
-	            style: __webpack_require__(139),
+	            template: __webpack_require__(142),
+	            style: __webpack_require__(143),
 	            directives: {
 	                focusModel: vue_focus_1.focusModel
 	            }
@@ -42308,19 +42413,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 138 */
+/* 142 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-new-event-container\">\r\n    <h3>New Event</h3>\r\n    <div class=\"h-sep\"></div>\r\n    <h4>Event Name</h4>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        v-focus-model=\"name_focus\"\r\n        v-model:bind=\"newEvent.name\"\r\n        class=\"form-control input-lg\"\r\n        placeholder=\"enter name\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"alias_input\" v-on:keyup.enter=\"addAlias()\" type=\"text\" class=\"form-control\" placeholder=\"add an alias\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addAlias()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-if=\"newEvent.name && newEvent.name != ''\"\r\n                class=\"label\"\r\n                v-bind:class=\"name_validity.checked ? (name_validity.valid ? 'label-success' :  'label-danger') : ''\">\r\n                {{newEvent.name.toLowerCase()}}\r\n            </span>\r\n            <span \r\n                v-for=\"(index, alias) in newEvent.aliases\"\r\n                class=\"label\"\r\n                v-bind:class=\"alias_validity[index] ? 'label-success' : alias_validity.length >= index ? '' : 'label-danger'\"\r\n            >\r\n                {{alias}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeAlias(index)\" class=\"fa fa-times alias-remove\"></i>\r\n            </span>\r\n            {{newEvent.aliases.length != 0 || (newEvent.name && newEvent.name != '') ? '' : 'none'}}\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Venue</label>\r\n    <typeahead class=\"venues-typeahead\"\r\n        :data=\"venue_names\"\r\n        placeholder=\"start typing venue name\"\r\n        :extra-option=\"typeaheadExtra\"\r\n        value-model=\"venue\"\r\n        focus-model=\"venue_focus\"\r\n    >\r\n    </typeahead>\r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-6 col-lg-4 col-xl-3\">\r\n            <label>Start Time</label>\r\n            <div>\r\n                <datepicker parent-date=\"start_date\" :autoclose=\"true\"></datepicker>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control hour\" \r\n                    placeholder=\"hh\"\r\n                    v-model=\"start_hour\"\r\n                    v-on:input=\"hourChanged('start_hour')\"\r\n                >\r\n                <span>:</span>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control minute\" \r\n                    placeholder=\"mm\"\r\n                    v-model=\"start_minute\"\r\n                    v-on:input=\"minuteChanged('start_minute')\"\r\n                    onchange=\"if(parseInt(this.value,10)<10)this.value='0'+this.value;\"\r\n                >\r\n                <button v-on:click=\"start_am = !start_am\" class=\"btn\">{{start_am? 'AM' : 'PM'}}</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-6 col-lg-4 col-xl-3\">\r\n            <label>End Time</label>\r\n            <div>\r\n                <datepicker parent-date=\"end_date\" :autoclose=\"true\"></datepicker>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control hour\" \r\n                    placeholder=\"hh\"\r\n                    v-model=\"end_hour\"\r\n                    v-on:input=\"hourChanged('end_hour')\"\r\n                >\r\n                <span>:</span>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control minute\" \r\n                    placeholder=\"mm\"\r\n                    v-model=\"end_minute\"\r\n                    v-on:input=\"minuteChanged('end_minute')\"\r\n                    onchange=\"if(parseInt(this.value,10)<10)this.value='0'+this.value;\"\r\n                >\r\n                <button v-on:click=\"end_am = !end_am\" class=\"btn\">{{end_am? 'AM' : 'PM'}}</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <button\r\n        v-on:click=\"saveEvent()\"\r\n        type=\"button\"\r\n        class=\"btn btn-success\" \r\n        v-bind:class=\"{'disabled': errors.length > 0}\"\r\n    >\r\n        Save Event\r\n    </button>\r\n    <div class=\"h-margin\"></div>\r\n    <div v-if=\"errorslength > 0\" class=\"alert alert-danger\">\r\n        <strong>Errors</strong>\r\n        <ul>\r\n            <li v-for=\"error in errors\">\r\n                <span v-if=\"!error.message\">\r\n                    Alias '{{error.alias}}' is already in use by {{error.conj}} {{error.model}}: <a class=\"alert-link\" v-link=\"{path: error.path}\">{{error.name}}</a>\r\n                </span>\r\n                <span v-if=\"error.message\">\r\n                    {{error.message}}\r\n                </span>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 139 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(140);
+	var content = __webpack_require__(144);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -42340,7 +42445,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 140 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -42354,7 +42459,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 141 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -42409,8 +42514,8 @@ webpackJsonp([0,1],[
 	    };
 	    EventInfoView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(142),
-	            style: __webpack_require__(143)
+	            template: __webpack_require__(146),
+	            style: __webpack_require__(147)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], EventInfoView);
@@ -42421,19 +42526,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 142 */
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-event-info-container\">\r\n    <h3>{{event.name}}</h3>\r\n    <button v-link=\"{path : '/dashboard/data/events/edit/' + this.event._id}\" type=\"button\" class=\"btn btn-primary pull-right\">\r\n        <strong>Edit</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-pencil\"></i>\r\n    </button>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-for=\"alias in event.aliases\"\r\n                class=\"label label-primary\"\r\n            >\r\n                {{alias}}\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <h4>Basic Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <label>Venue: &nbsp;</label>\r\n        <a v-link=\"{path: '/dashboard/data/venues/info/' + event.venue._id}\"><strong>{{event.venue.name}}</strong></a>\r\n        \r\n        <br>\r\n        \r\n        <label>Address: &nbsp;</label>\r\n        <span>{{event.venue.address}}</span>\r\n        \r\n        <div class=\"h-margin\"></div>\r\n        \r\n        <label>Start Time: &nbsp;</label>\r\n        <span>{{startTime}}</span>\r\n\r\n        <br>\r\n\r\n        <label>End Time: &nbsp;</label>\r\n        <span>{{endTime}}</span>\r\n        </div>\r\n    </div>\r\n    <h4>Custom Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span class=\"font-mediumgray-dark\">coming soon...</span>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 143 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(144);
+	var content = __webpack_require__(148);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -42453,7 +42558,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 144 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -42467,7 +42572,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 145 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -42501,8 +42606,8 @@ webpackJsonp([0,1],[
 	    };
 	    DataVenues = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(146),
-	            style: __webpack_require__(147)
+	            template: __webpack_require__(150),
+	            style: __webpack_require__(151)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DataVenues);
@@ -42513,19 +42618,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 146 */
+/* 150 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-venues-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Venues</h3>\r\n            <button v-link=\"{path : '/dashboard/data/venues/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Venue</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <venue-datalist\r\n            :venues=\"venues\"\r\n        ></venue-datalist>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 147 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(148);
+	var content = __webpack_require__(152);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -42545,7 +42650,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 148 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -42559,7 +42664,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 149 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -42743,8 +42848,8 @@ webpackJsonp([0,1],[
 	    ], NewVenueView.prototype, "nameFocuseChanged", null);
 	    NewVenueView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(150),
-	            style: __webpack_require__(151),
+	            template: __webpack_require__(154),
+	            style: __webpack_require__(155),
 	            directives: {
 	                focusModel: vue_focus_1.focusModel
 	            }
@@ -42768,19 +42873,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 150 */
+/* 154 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-new-venue-container\">\r\n    <h3>New Venue</h3>\r\n    <div class=\"h-sep\"></div>\r\n    <h4>Venue Name</h4>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        v-focus-model=\"name_focus\"\r\n        v-model:bind=\"newVenue.name\"\r\n        class=\"form-control input-lg\"\r\n        placeholder=\"enter name\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"alias_input\" v-on:keyup.enter=\"addAlias()\" type=\"text\" class=\"form-control\" placeholder=\"add an alias\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addAlias()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-if=\"newVenue.name && newVenue.name != ''\"\r\n                class=\"label\"\r\n                v-bind:class=\"name_validity.checked ? (name_validity.valid ? 'label-success' :  'label-danger') : ''\">\r\n                {{newVenue.name.toLowerCase()}}\r\n            </span>\r\n            <span \r\n                v-for=\"(index, alias) in newVenue.aliases\"\r\n                class=\"label\"\r\n                v-bind:class=\"alias_validity[index] ? 'label-success' : (index < alias_validity.length ? 'label-danger' : '')\"\r\n            >\r\n                {{alias}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeAlias(index)\" class=\"fa fa-times alias-remove\"></i>\r\n            </span>\r\n            {{newVenue.aliases.length != 0 || (newVenue.name && newVenue.name != '') ? '' : 'none'}}\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Address</label>\r\n    <input v-model:bind=\"newVenue.address\" type=\"text\" class=\"form-control\" placeholder=\"enter venue address\">\r\n    <div class=\"h-margin\"></div>\r\n    <button\r\n        v-on:click=\"saveVenue()\"\r\n        type=\"button\"\r\n        class=\"btn btn-success\" \r\n        v-bind:class=\"{'disabled': errors.length > 0}\"\r\n    >\r\n        Save Venue\r\n    </button>\r\n    <div class=\"h-margin\"></div>\r\n    <div v-if=\"errorslength > 0\" class=\"alert alert-danger\">\r\n        <strong>Errors</strong>\r\n        <ul>\r\n            <li v-for=\"error in errors\">\r\n                <span v-if=\"!error.message\">\r\n                    Alias '{{error.alias}}' is already in use by {{error.conj}} {{error.model}}: <a class=\"alert-link\" v-link=\"{path: error.path}\">{{error.name}}</a>\r\n                </span>\r\n                <span v-if=\"error.message\">\r\n                    {{error.message}}\r\n                </span>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 151 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(152);
+	var content = __webpack_require__(156);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -42800,7 +42905,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 152 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -42814,7 +42919,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 153 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -42852,8 +42957,8 @@ webpackJsonp([0,1],[
 	    };
 	    VenueInfoView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(154),
-	            style: __webpack_require__(155)
+	            template: __webpack_require__(158),
+	            style: __webpack_require__(159)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], VenueInfoView);
@@ -42864,19 +42969,19 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 154 */
+/* 158 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-venue-info-container\">\r\n    <h3>{{venue.name}}</h3>\r\n    <button v-link=\"{path : '/dashboard/data/venues/edit/' + this.venue._id}\" type=\"button\" class=\"btn btn-primary pull-right\">\r\n        <strong>Edit</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-pencil\"></i>\r\n    </button>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-for=\"alias in venue.aliases\"\r\n                class=\"label label-primary\"\r\n            >\r\n                {{alias}}\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <h4>Basic Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <label>Address: &nbsp;</label>\r\n        <span>{{venue.address}}</span>\r\n    </div>\r\n    <h4>Custom Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span class=\"font-mediumgray-dark\">coming soon...</span>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 155 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(156);
+	var content = __webpack_require__(160);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -42896,7 +43001,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 156 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -42910,7 +43015,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 157 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue, $) {"use strict";
@@ -42929,7 +43034,7 @@ webpackJsonp([0,1],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var vue_typescript_1 = __webpack_require__(36);
-	var Utils = __webpack_require__(158);
+	var Utils = __webpack_require__(162);
 	var ExactQuestionNewView = (function (_super) {
 	    __extends(ExactQuestionNewView, _super);
 	    function ExactQuestionNewView() {
@@ -43044,8 +43149,8 @@ webpackJsonp([0,1],[
 	    };
 	    ExactQuestionNewView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(159),
-	            style: __webpack_require__(160)
+	            template: __webpack_require__(163),
+	            style: __webpack_require__(164)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], ExactQuestionNewView);
@@ -43056,7 +43161,7 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
 
 /***/ },
-/* 158 */
+/* 162 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -43072,19 +43177,19 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 159 */
+/* 163 */
 /***/ function(module, exports) {
 
 	module.exports = "<div id=\"ccb-new-exact-question-container\">\r\n    <h3>New Exact Question</h3>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <label>Question Name</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"name\"\r\n    >\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Question</label>&nbsp;&nbsp;&nbsp;\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span>\r\n            <strong>Add Match</strong>&nbsp;&nbsp;Type:\r\n            <button-toggler\r\n                :options=\"['static', 'dynamic']\"\r\n                value-model=\"question.type\"\r\n            ></button-toggler>\r\n            <tool-tipz v-on:click=\"infoclick()\">\r\n                <span slot=\"hover\"><i class=\"fa fa-question type-tooltip\"></i></span>\r\n                <span slot=\"content\">\r\n                    click to learn more about question matching\r\n                </span>\r\n            </tool-tipz>\r\n        </span>\r\n        <div v-if=\"errorMessage != ''\" class=\"match-error\">\r\n            <div class=\"h-margin-sm\"></div>\r\n            <div class=\"alert alert-danger\">\r\n              <button type=\"button\" class=\"close\" v-on:click=\"errorMessage = ''\"><i class=\"fa fa-times\"></i></button>\r\n              <strong>Error: </strong> {{errorMessage}}\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"question.input\" v-on:keyup.enter=\"addQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add an question match\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <strong v-if=\"question.matches.length > 0\">Matches</strong>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <ul class=\"list-group q-list\">\r\n            <li v-for=\"q in question.matches\" class=\"list-group-item\">\r\n                <table class=\"q-content\">\r\n                    <tr>\r\n                        <td>{{q.string}}?</td>\r\n                        <td class=\"q-type\">{{q.type}}</td>\r\n                        <td class=\"q-remove\"><i v-on:click=\"removeQuestion(q)\" class=\"fa fa-times\"></i></td>\r\n                    </tr>\r\n                </table>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <toggle-panel\r\n        body-bg=\"bg-lightgray-dark\"\r\n    >\r\n        <strong slot=\"title\">Test Questions</strong>\r\n        <div slot=\"body\">\r\n            <div class=\"test-body\">\r\n                <div class=\"input-group\">\r\n                    <input v-model:bind=\"testInput\" v-on:keyup.enter=\"addTestQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add a test question\">\r\n                    <div class=\"input-group-btn\">\r\n                        <button v-on:click=\"addTestQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <div class=\"h-margin-sm\"></div>\r\n                <ul class=\"list-group q-list test-question-list\">\r\n                    <li v-for=\"q in testQuestions\" class=\"list-group-item font-darkgray-dark {{q.matched ? 'list-group-item-success' : 'bg-grapefruit-light'}}\">\r\n                        <table class=\"q-content\">\r\n                            <tr>\r\n                                <td>{{q.string}}?</td>\r\n                                <td class=\"q-remove\"><i v-on:click=\"removeTestQuestion(q)\" class=\"fa fa-times\"></i></td>\r\n                            </tr>\r\n                        </table>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </toggle-panel>\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Response</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"question response\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    <div v-show=\"sdInfoOpen\" id=\"sdinfo\">\r\n        <div class=\"well bg-lightgray-dark\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-6\">\r\n                    <h4>Matching Info</h4>\r\n                </div>\r\n                <div class=\"col-xs-6\">\r\n                    <span v-on:click=\"sdInfoOpen = false\" class=\"info-close\">close <i class=\"fa fa-times\"></i></span>\r\n                </div>\r\n            </div>\r\n            <label>Matches</label>\r\n            <p>Matches are what determines if the user asked this specific question or not. Since ther are many ways to ask the same question; here, we have many ways to match a specific question. When a question is asked, the bot will check if it matches any of the question-matches set above, if it does, then it will reply with the given response</p>\r\n            <label>Static</label>\r\n            <p>A static match is just exact words. I will compare the question with the match ignoring both the case (capitalisation) and the questionmark. If the question matches exactly the match, it will reply with the response.</p>\r\n            <p>Example: 'What is my name?' will match:</p>\r\n            <ul>\r\n                <li>'what is my name?'</li>\r\n                <li>'What IS MY NaMe'</li>\r\n            </ul>\r\n            <label>Dynamic</label>\r\n            <p>Dynamic matches use Regular Expressions to match question, which means that you can put symbols in the match and create complex behaviours</p>\r\n            <p>Some Useful constructs:</p>\r\n            <ul>\r\n                <li><strong>(one|other)</strong> - will match either 'one' or 'other' in the place where it is set</li>\r\n                Example: 'Can i drink (soda|beer|maple syrup)' will match:\r\n                <ul>\r\n                    <li>can i drink beer</li>\r\n                    <li>Can i drink SODA?</li>\r\n                    <li>Can i drink maple syrup</li>\r\n                </ul>\r\n                <li><strong><strong>.*</strong></strong> - will match any number of characters</li>\r\n                Example: 'Is beachday .* fun?' will match:\r\n                <ul>\r\n                    <li>is beachday super fun</li>\r\n                    <li>is beachday super duper fun</li>\r\n                <strong>But Not</strong>\r\n                    <li>is beachday fun</li>\r\n                        this is because it expects two spaces around the '.*', removing one of the spaces in the match would make it work with the above example\r\n                </ul>\r\n                '.*hello.*' will match anything that contains 'hello'\r\n            </ul>\r\n            <p>Click <a href=\"http://www.zytrax.com/tech/web/regex.htm#search\">here</a> for a full guide on regular expressions</p>\r\n            <p>Or <a href=\"https://www.cheatography.com/davechild/cheat-sheets/regular-expressions/\">here</a> for a regular expression cheat sheet</p>\r\n\r\n            <strong>WARNING</strong>\r\n            <p>Regular expressions are very powerful, but also quite difficult to master, be very careful when using the '*' quantifier, it will open the possibility of matching a large ammout of questions. For example, if you put '.*' as a match, literally any sequence of character will match to it. This will make it so that none of the data object will ever be matched.</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
-/* 160 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(161);
+	var content = __webpack_require__(165);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(17)(content, {});
@@ -43104,7 +43209,7 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
-/* 161 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(12)();
@@ -43118,7 +43223,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 162 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -43144,7 +43249,7 @@ webpackJsonp([0,1],[
 	    }
 	    NotFoundView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(163)
+	            template: __webpack_require__(167)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], NotFoundView);
@@ -43155,7 +43260,7 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 163 */
+/* 167 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>This part of the website is not built yet</h3>"

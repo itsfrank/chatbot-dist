@@ -1,6 +1,7 @@
 "use strict";
 var request = require('request');
 var Ask = require('./ask_routes');
+var Faculties = require('../services/faculties');
 var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
@@ -12,7 +13,7 @@ var FacebookRoutes = (function () {
 }());
 exports.FacebookRoutes = FacebookRoutes;
 var VALIDATION_TOKEN = 'fb_licorne_webhook';
-var PAGE_TOKEN = 'EAAXBClPmZCXABAIxPhM2zZArpaC2dc6acZA4MoeVLfa14u5WTYMBVZBr3oaZA3XWc29EoTDYgWy38N87vsJbZCN2bnH7LQcRNTLOdtziosdUAhekBbZAVwA6SiNSHsZCcPpnOQgaKeZA7KIfDODdJt8WRsFa6dG0x5lNG2SCwbbZBjzAZDZD';
+var PAGE_TOKEN = 'EAAXBClPmZCXABAE0UAZBwkrJL0MtCVvDRaADfId0WH7bwKcjkp5t2xrxCKPaDcu7OcwWAcElrFiPSjMJ9GbX8erzkQmTbpUD84bjMAPc6PfZCNmf2Y6W3xbL6mxgRvkoKFkWRUBHoYmpprzs4weBsRAcwsMbFw6qMBAZAkAZB3QZDZD';
 function webhook(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === VALIDATION_TOKEN) {
@@ -38,7 +39,7 @@ function facebookMessage(req, res) {
                 if (messagingEvent.optin) {
                 }
                 else if (messagingEvent.message) {
-                    receivedMessage(messagingEvent);
+                    receivedMessage(messagingEvent, Faculties.FacultyMap.facebook.ids[pageID]);
                 }
                 else if (messagingEvent.delivery) {
                 }
@@ -56,7 +57,7 @@ function facebookMessage(req, res) {
         res.sendStatus(200);
     }
 }
-function receivedMessage(event) {
+function receivedMessage(event, faculty) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
@@ -68,13 +69,13 @@ function receivedMessage(event) {
     var messageText = message.text;
     var messageAttachments = message.attachments;
     if (messageText) {
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(faculty, senderID, messageText);
     }
     else if (messageAttachments) {
     }
 }
-function sendTextMessage(recipientId, messageText) {
-    Ask.questionResponse(messageText, function (response) {
+function sendTextMessage(faculty, recipientId, messageText) {
+    Ask.questionResponse(faculty, messageText, function (response) {
         var messageData = {
             recipient: {
                 id: recipientId

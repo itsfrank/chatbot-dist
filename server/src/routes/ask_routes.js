@@ -1,6 +1,8 @@
 "use strict";
 var elasticsearch_1 = require('../services/elasticsearch');
 var question_routes_1 = require('./question_routes');
+var Faculties = require('../services/faculties');
+var Utils = require('../services/utils');
 var AskRoutes = (function () {
     function AskRoutes() {
     }
@@ -12,16 +14,20 @@ var AskRoutes = (function () {
 exports.AskRoutes = AskRoutes;
 var scoreThreshold = 0.15;
 function askQuestion(req, res) {
-    questionResponse(req.query.q, function (response) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
+    console.log(req.subdomains);
+    questionResponse(index, req.query.q, function (response) {
         res.send(response);
     });
 }
-function questionResponse(question, callback) {
+function questionResponse(index, question, callback) {
     if (!question || question == '')
         callback('You must ask a question!');
     else {
         elasticsearch_1.elasticsearch.search({
-            index: 'questions',
+            index: index,
             type: question_routes_1.TYPE_NAME,
             body: {
                 "query": {

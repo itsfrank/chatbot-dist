@@ -1,5 +1,6 @@
 "use strict";
 var elasticsearch_1 = require('../services/elasticsearch');
+var Faculties = require('../services/faculties');
 var Utils = require('../services/utils');
 var Questions = require('../services/questions');
 var QuestionRoutes = (function () {
@@ -17,8 +18,11 @@ var QuestionRoutes = (function () {
 exports.QuestionRoutes = QuestionRoutes;
 exports.TYPE_NAME = 'q';
 function getQuestionCollection(req, res) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     elasticsearch_1.elasticsearch.search({
-        index: 'questions',
+        index: index,
         type: exports.TYPE_NAME,
         body: {
             query: {
@@ -37,8 +41,11 @@ function getQuestionCollection(req, res) {
     });
 }
 function getQuestion(req, res) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     elasticsearch_1.elasticsearch.get({
-        index: 'questions',
+        index: index,
         type: exports.TYPE_NAME,
         id: req.params.id
     }).then(function (value) {
@@ -55,10 +62,13 @@ function getQuestion(req, res) {
     });
 }
 function postQuestion(req, res) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     var q = Questions.qToDoc(req.body);
     elasticsearch_1.elasticsearch.search({
-        index: 'questions',
-        type: "multi",
+        index: index,
+        type: exports.TYPE_NAME,
         body: {
             "query": {
                 "match": {
@@ -80,7 +90,7 @@ function postQuestion(req, res) {
             }
         }
         elasticsearch_1.elasticsearch.create({
-            index: 'questions',
+            index: index,
             type: exports.TYPE_NAME,
             body: q
         }).then(function (value) {
@@ -91,7 +101,7 @@ function postQuestion(req, res) {
     }, function (err) {
         if (err.status == 404) {
             elasticsearch_1.elasticsearch.create({
-                index: 'questions',
+                index: index,
                 type: exports.TYPE_NAME,
                 body: q
             }).then(function (value) {
@@ -105,10 +115,13 @@ function postQuestion(req, res) {
     });
 }
 function putQuestion(req, res) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     var q = Questions.qToDoc(req.body);
     elasticsearch_1.elasticsearch.search({
-        index: 'questions',
-        type: "multi",
+        index: index,
+        type: exports.TYPE_NAME,
         body: {
             "query": {
                 "match": {
@@ -130,7 +143,7 @@ function putQuestion(req, res) {
             }
         }
         elasticsearch_1.elasticsearch.update({
-            index: 'questions',
+            index: index,
             type: exports.TYPE_NAME,
             id: req.params.id,
             body: { doc: q }
@@ -144,8 +157,11 @@ function putQuestion(req, res) {
     });
 }
 function deleteQuestion(req, res) {
+    var index = Faculties.requestFaculty(req);
+    if (!index)
+        Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     elasticsearch_1.elasticsearch.delete({
-        index: 'questions',
+        index: index,
         type: exports.TYPE_NAME,
         id: req.params.id
     }).then(function (value) {

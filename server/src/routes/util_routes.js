@@ -1,5 +1,6 @@
 "use strict";
 var elasticsearch_1 = require('../services/elasticsearch');
+var Faculties = require('../services/faculties');
 var question_routes_1 = require('../routes/question_routes');
 var UtilRoutes = (function () {
     function UtilRoutes() {
@@ -12,7 +13,6 @@ var UtilRoutes = (function () {
 exports.UtilRoutes = UtilRoutes;
 function resetQuestions(req, res) {
     var p = req.query.p;
-    console.log(p);
     if (!p) {
         res.statusCode = 400;
         res.send("denied");
@@ -22,24 +22,30 @@ function resetQuestions(req, res) {
         res.send("denied");
     }
     else {
-        elasticsearch_1.elasticsearch.indices.delete({
-            index: 'questions'
-        }).then(function (value) {
-            elasticsearch_1.elasticsearch.indices.create({
-                index: 'questions'
+        for (var _i = 0, _a = Faculties.facultyList; _i < _a.length; _i++) {
+            var faculty = _a[_i];
+            elasticsearch_1.elasticsearch.indices.delete({
+                index: faculty
             }).then(function (value) {
-                elasticsearch_1.elasticsearch.indices.putMapping({
-                    index: 'questions',
-                    type: question_routes_1.TYPE_NAME,
-                    body: {
-                        "properties": {
-                            "questions": {
-                                "type": "nested"
+                elasticsearch_1.elasticsearch.indices.create({
+                    index: faculty
+                }).then(function (value) {
+                    elasticsearch_1.elasticsearch.indices.putMapping({
+                        index: faculty,
+                        type: question_routes_1.TYPE_NAME,
+                        body: {
+                            "properties": {
+                                "questions": {
+                                    "type": "nested"
+                                }
                             }
                         }
-                    }
-                }).then(function (value) {
-                    res.send(value);
+                    }).then(function (value) {
+                        res.send(value);
+                    }, function (err) {
+                        res.statusCode = 500;
+                        res.send(err);
+                    });
                 }, function (err) {
                     res.statusCode = 500;
                     res.send(err);
@@ -48,10 +54,7 @@ function resetQuestions(req, res) {
                 res.statusCode = 500;
                 res.send(err);
             });
-        }, function (err) {
-            res.statusCode = 500;
-            res.send(err);
-        });
+        }
     }
 }
 //# sourceMappingURL=util_routes.js.map

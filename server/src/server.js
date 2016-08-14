@@ -13,6 +13,7 @@ var mongo_express_config = require('./mongo-config.js');
 var config_1 = require('./config');
 var app = express();
 var env = process.env.CCBOT_ENV;
+console.log(env);
 var configs = config_1.Config[env];
 if (!configs) {
     configs = config_1.Config['production'];
@@ -31,7 +32,9 @@ database_1.Database.connect(configs.mongo.host, configs.mongo.port, configs.mong
     Definitions.reload();
 });
 elasticsearch.connect(configs.elasticsearch.host, configs.elasticsearch.port, configs.elasticsearch.loglevel);
-elasticsearch.pingWait();
+elasticsearch.pingWait(function () {
+    elasticsearch.prepareIndices();
+});
 //Body to json
 app.use(bodyParser.json());
 //Serve static
