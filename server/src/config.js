@@ -12,7 +12,7 @@ exports.Config = {
         elasticsearch: {
             host: 'localhost',
             port: 9200,
-            loglevel: 'trace'
+            loglevel: 'error'
         }
     },
     test: {

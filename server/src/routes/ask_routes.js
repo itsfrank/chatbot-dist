@@ -3,6 +3,7 @@ var elasticsearch_1 = require('../services/elasticsearch');
 var question_routes_1 = require('./question_routes');
 var Faculties = require('../services/faculties');
 var Utils = require('../services/utils');
+var Metrics = require('../services/metrics');
 var AskRoutes = (function () {
     function AskRoutes() {
     }
@@ -18,13 +19,14 @@ function askQuestion(req, res) {
     if (!index)
         Utils.sendError(res, 400, 'bad subdomain', 'subdomain', 'Subdomain does not match faculty');
     console.log(req.subdomains);
-    questionResponse(index, req.query.q, function (response) {
+    questionResponse(index, req.query.q, function (response, found) {
+        Metrics.updateMetrics(index, found, false, req.query.q);
         res.send(response);
     });
 }
 function questionResponse(index, question, callback) {
     if (!question || question == '')
-        callback('You must ask a question!');
+        callback('You must ask a question!', false);
     else {
         elasticsearch_1.elasticsearch.search({
             index: index,
@@ -58,14 +60,14 @@ function questionResponse(index, question, callback) {
             }
         }).then(function (value) {
             if (value.hits.total == 0 || value.hits.max_score < scoreThreshold) {
-                callback('I\'m sorry, I don\'t know how to awnser this question unfortunately');
+                callback('I\'m sorry, I don\'t know how to awnser this question unfortunately', false);
             }
             else {
-                callback(value.hits.hits[0]._source.response);
+                callback(value.hits.hits[0]._source.response, true);
             }
         }, function (err) {
             console.log(err);
-            callback('I\'m sorry, there was an error in my server, try asking again or contact an admin');
+            callback('I\'m sorry, there was an error in my server, try asking again or contact an admin', false);
         });
     }
 }

@@ -2,6 +2,7 @@
 var request = require('request');
 var Ask = require('./ask_routes');
 var Faculties = require('../services/faculties');
+var Metrics = require('../services/metrics');
 var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
@@ -75,7 +76,8 @@ function receivedMessage(event, faculty) {
     }
 }
 function sendTextMessage(faculty, recipientId, messageText) {
-    Ask.questionResponse(faculty, messageText, function (response) {
+    Ask.questionResponse(faculty, messageText, function (response, found) {
+        Metrics.updateMetrics(faculty, found, false, messageText);
         var messageData = {
             recipient: {
                 id: recipientId

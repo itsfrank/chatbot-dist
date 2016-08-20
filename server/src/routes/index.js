@@ -5,6 +5,8 @@ var data_routes_1 = require('./data_routes');
 var facebook_routes_1 = require('./facebook_routes');
 var question_routes_1 = require('./question_routes');
 var util_routes_1 = require('./util_routes');
+var metrics_routes_1 = require('./metrics_routes');
+var twilio_routes_1 = require('./twilio_routes');
 var RouteBinder = (function () {
     function RouteBinder() {
     }
@@ -18,6 +20,8 @@ var RouteBinder = (function () {
         facebook_routes_1.FacebookRoutes.bind(router);
         question_routes_1.QuestionRoutes.bind(router);
         util_routes_1.UtilRoutes.bind(router);
+        metrics_routes_1.MetricsRoutes.bind(router);
+        twilio_routes_1.TwilioRoutes.bind(router);
     };
     return RouteBinder;
 }());

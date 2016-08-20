@@ -4,7 +4,7 @@ var https = require('https');
 var express = require('express');
 var bodyParser = require('body-parser');
 var elasticsearch = require('./services/elasticsearch');
-var Definitions = require('./services/definitions');
+var Metrics = require('./services/metrics');
 var database_1 = require('./services/database');
 var routes_1 = require('./routes');
 var words_1 = require('./services/words');
@@ -29,7 +29,7 @@ if (mongo_password && mongo_password.indexOf('::') > -1) {
 // const user:string = process.env.CCBOT_USER;
 // const password:string = process.env.CCBOT_PWD;
 database_1.Database.connect(configs.mongo.host, configs.mongo.port, configs.mongo.database, configs.mongo.username, mongo_password, {}, function () {
-    Definitions.reload();
+    Metrics.initMetrics();
 });
 elasticsearch.connect(configs.elasticsearch.host, configs.elasticsearch.port, configs.elasticsearch.loglevel);
 elasticsearch.pingWait(function () {
