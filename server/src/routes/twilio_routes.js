@@ -9,6 +9,6 @@ var TwilioRoutes = (function () {
 }());
 exports.TwilioRoutes = TwilioRoutes;
 function twilioWebhook(req, res) {
-    console.log(req.body);
+    console.log(req);
 }
 //# sourceMappingURL=twilio_routes.js.map
