@@ -37,6 +37,9 @@ elasticsearch.pingWait(function () {
 });
 //Body to json
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 //Serve static
 app.use('/', express.static('../client'));
 //mongo-express db manager
