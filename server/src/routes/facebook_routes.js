@@ -76,17 +76,21 @@ function receivedMessage(event, faculty) {
     }
 }
 function sendTextMessage(faculty, recipientId, messageText) {
-    Ask.questionResponse(faculty, messageText, function (response, found) {
-        Metrics.updateMetrics(faculty, found, false, messageText);
-        var messageData = {
-            recipient: {
-                id: recipientId
-            },
-            message: {
-                text: response
-            }
-        };
-        callSendAPI(faculty, messageData);
+    Ask.questionResponse(faculty, messageText, function (response, found, emergency) {
+        if (emergency) {
+        }
+        else {
+            Metrics.updateMetrics(faculty, found, false, messageText);
+            var messageData = {
+                recipient: {
+                    id: recipientId
+                },
+                message: {
+                    text: response
+                }
+            };
+            callSendAPI(faculty, messageData);
+        }
     });
 }
 function callSendAPI(faculty, messageData) {

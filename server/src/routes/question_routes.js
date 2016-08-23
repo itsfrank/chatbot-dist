@@ -24,6 +24,7 @@ function getQuestionCollection(req, res) {
     elasticsearch_1.elasticsearch.search({
         index: index,
         type: exports.TYPE_NAME,
+        size: 1000,
         body: {
             query: {
                 match_all: {}
@@ -114,6 +115,7 @@ function postQuestion(req, res) {
             Utils.sendError(res, 500, 'elasticsearch', 'unknown', 'an error occured searching es', err);
     });
 }
+exports.postQuestion = postQuestion;
 function putQuestion(req, res) {
     var index = Faculties.requestFaculty(req);
     if (!index)

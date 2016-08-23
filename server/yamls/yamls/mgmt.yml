@@ -1,0 +1,744 @@
+"Opening ceremonies":
+    keywords: ["opening ceremonies", "Drop Off", "East Field", "lower field", "Level 1"]
+    questions: 
+        - "When do opening ceremonies start?"
+        - "Where are opening ceremonies?"
+        - "When is the Drop Off?"
+        - "Where is the Drop Off?"
+    response: "Opening ceremonies start at 1:30pm, at the East Field on campus. Have fun!"
+
+"Peaches Castle":
+    keywords: ["Stero", "peaches castle", "all ages", "Friday night"]
+    questions:
+        - "What is the friday night event?"
+        - "When does Peaches Castle start?"
+        - "When does Stereo start?"
+        - "Is Stereo all ages?"
+    Response: "Friday night's event is from 9pm-2am at Stereo (858 Sainte-Catherine East). The event is all ages, but still please bring government ID."
+
+"Power Up":
+    keywords: ["La Marq 515", "thursday morning", "thursday breakfast", "Power Up"]
+    Questions:
+        - "When is the Thursday morning breakfast?"
+        - "Where is the thursday breakfast?"
+        - "Will there be gluten free/vegan options at la marq?"
+        - "When is Power up?"
+    response: "Power Up takes place at La Marq 515 (1430 Rue City Councillors) from 9:30am-12pm. There will be gluten free and vegan options."
+
+"La Marq location":
+    keywords: ["la marq", "la marq 515", "varcity 515"]
+    questions:
+        - "where is La Marq 515?"
+        - "Where is Varcity 515?"
+    response: "1430 Rue City Councillors, Montreal, QC, H3B 1B4"
+
+"Mushroom Cup":
+    keywords: ["bar crawl", "Mushroom Cup"]
+    Questions: 
+        - "When is the bar crawl?"
+        - "When does the mushroom Cup start?"
+        - "Where is the bar crawl?"
+    response: "The crawl goes from 4-9pm, however there are two start times. Please contact your leader to figure out your start time/location. Make sure to bring government ID!"
+
+"Crawl ages":
+    keywords: ["underage", "crawl", "mushroom Cup", "under 18"]
+    questions:
+        - "I am underage, can I still participate in the crawl?"
+        - "I am under 18, can I still participate in the mushroom Cup?"
+        - "Is the crawl all ages?"
+    response: "Of course, while you may not be able to enter a few locations, most will allow you in. Please remember to still bring your ID!"
+
+"Crawl Dietary restrictions":
+    keywords: ["crawl dietary restrictions", "gluten free options", "crawl", "vegan"]
+    questions: 
+        - "Will there be gluten free, vegan and vegetarian options on the crawl?"
+        - "Will there be gluten free and vegan options on the east australian current?"
+    response: "Yes! Each food and drink stop will have options to fit celiacs, vegetarians and vegans!"
+
+"Frappe":
+    keywords: ["Frappe"]
+    questions: 
+        - "Where is Frappe?"
+        - "What is Frappe's address?"
+    response: "3900 Saint Laurent, Montreal, QC, H2W 1Y2"
+
+"Gerts":
+    keywords: ["Gerts"]
+    questions:
+        - "Where is Gerts bar?"
+        - "What is the address for Gerts?"
+    response: "Gerts is in the basement of the SSMU building, 3480 Rue McTavish"
+
+"McKibbins":
+    keywords: ["McKibbins"]
+    questions: 
+        - "Where is McKibbins?"
+    response: "There are two locations. McKibbons east: 3515 Boul St-Laurent. McKibbons west: 1426 Rue Bishop"
+
+"CnP":
+    keywords: ["Carlos and Pepe's", "CnP"]
+    questionns:
+        - "Where is Carlos and Pepes located?"
+        - "What is the address for Carlos and Pepes"
+    response: "Carlos and Pepes is at 1420 Rue Peel, Montreal, QC, H3A 1S8"
+
+"Ivy/Facul-T":
+    keywords: ["Ivy", "Facul-T", "faculty"]
+    questions:
+        - "Where is Facul-T located"
+        - "Where is Ivy located"
+        - "What is the address for Facul-T?"
+    response: "Facul-T is located at 3556 Boul St Laurent, Montreal, QC H2X 2V1"
+
+"3565":
+    keywords: ["3565"]
+    questions: 
+        - "Where is 3565 located?"
+        - "What is the address for 3565?"
+    response: "3565 is located at 3565 Saint Laurent, Montreal, QC, H2X 2T6"
+
+"CoC":
+    keywords: ["COC", "chef on call"]
+    questions:
+        - "Where is chef on call?"
+        - "What is the phone number for chef on call?"
+    response: "Chef on call is located at 3430 Ave du Parc, (514) 844-2044"
+
+"Cafe Campus":
+    keywords: ["Cafe campus", "CC"]
+    questions: 
+        - "Where is cafe campus?"
+        - "what is the address for cafe camppus?"
+    response: "Brigade Pizza is at 57 Rue Prince Arthur EAST, Montreal, QC, H2X 1B4"
+
+"Muzique":
+    keywords: ["Muzique"]
+    questions: 
+        - "Where is Muzique located?"
+        - "What is the address of Muzique?"
+    response: "Muzique is located at 3781 Boul St-Laurent"
+
+"Ace bar":
+    keywords: ["Ace Bar", "Ace"]
+    questions: 
+        - "Where is Ace Bar located?"
+        - "What is the address of Ace Bar?"
+    response: "Ace is located at 420 rue sherbrooke west, Montreal, QC, H3A 1B4"
+
+"Fiddlers":
+    keywords: ["Fiddlers"]
+    questions: 
+        - "Where is Fiddlers located?"
+        - "What is the address of Fiddlers?"
+    response: "Fiddler's Green Pub is at 1224 Rue Bishop, Montreal, QC, H3G 2E2"
+
+"TRH":
+    keywords: ["TRH", "trash bar"]
+    questions: 
+        - "Where is TRH bar located?"
+        - "What is the address of TRH bar?"
+    response: "TRH bar is located at 3699 Boul St-Laurent"
+
+"intro":
+    keywords: ["hi", "hello", "hola", "bonjour", "hey", "yo", "sup"]
+    questions:
+        - "Hi"
+        - "Hello"
+        - "Hola"
+        - "Bonjour"
+        - "Hey"
+    response: "Hey, Welcome to Froshbot! If you have any questions regarding Management frosh events, times, and locations, don't hesitate to ask!"
+
+"small talk":
+    keywords: ["how","you"]
+    questions: 
+        - "How are you today?"
+    response: "I'm doing great, thanks for asking!"
+
+"event":
+    keywords: ["events", "today"]
+    questions: 
+        - "What events are today?"
+        - "What am I doing today?"
+    response: "Beach day every day!!! But for real, if today is not Saturday please see the welcome booklet or website (wwww.musfrosh.com) for details about today's events."
+
+"Dokey Kong's Jungle":
+    keywords: ["Donkey Kong's Jungle", "thursday night", "concert", "start", "open", "time"]
+    Questions: 
+        - "Where is the Donkey Kong's Jungle concert?"
+        - "Where is the thursday night concert?"
+        - "When does the thursday night concernt start?"
+        - "When is the Donkey Kong's Jungle?"
+        - "What time does Metropolis start?"
+        - "What time does L'Olympia start on thursday?"
+    response: "There are two locations for tonight. Metropolis (59 Rue Saint-Catherine E) from 7:30pm-12am and L'Olympia (1004 Rue Saint-Catherine E) from 9pm-2am"
+
+"Metropolis":
+    keywords: ["Metropolis", "address"]
+    questions:
+        - "Where is Metropolis?"
+        - "What is the address of Metropolis?"
+    response: "Metropolis is at 59 Rue Saint-Catherine E"
+
+"L'Olympia":
+    keywords: ["L'Olympia"]
+    questions: 
+        - "Where is L'Olympia?"
+        - "What is the address of L'Olympia?"
+    response: "L'olympia is at 1004 Rue Saint-Catherine E"
+
+"THursday artist":
+    keywords: ["playing", "artist", "Metropolis", "l'Olympia", "thursday", "thursday night", "rage stage", "hip hop stage"]
+    questions:
+        - "Who is playing the thursday night concert?"
+        - "Who is playing L'olympia on thursday?"
+        - "Who is playing Metropolis on thursday?"
+        - "Who is the artist at the hip hop stage?"
+        - "Who is playing at the rage stage?"
+    response: "Ty Dolla $ign is playing at Metropolis, while L'Olympia is a surprise artist! (not avicii)"
+
+"Peaches Five Force":
+    keywords: ["Peaches Five Forces", "business challenge"]
+    questions: 
+        - "When will the business challenge begin?"
+        - "What is peaches five forces?"
+    response: "The business challenge takes place in brongman, throughout the McGill Campus, and around the Milton Parc Community! Have fun and think outside the box!"
+
+"The Tailgate":
+    keywords: ["tailgate", "shark bait hoo ha ha", "football game"]
+    questions:
+        - "Where is the tailgate located?"
+        - "Where is the tailgate?"
+        - "Where is the football game?"
+        - "What time is the football game?"
+        - "When is the tailgate?"
+        - "when is the football game?"
+    response: "The tailgate is at the Tomlinson fieldhouse (1:30-4:30pm), while the football game is at Molson Stadium (4:30-8pm)"
+
+"Football game":
+    keywords: ["football", "playing", "teams"]
+    Questions: 
+        - "Who is playing the football game?"
+        - "Who is McGill playing?"
+        - "What teams are playing in the football game?"
+    response: "McGill will be playing against our rivals Concordia. Go Redmen!! Nobody likes bumblebees anyways..."
+
+"Bowser's Castle":
+    keywords: ["friday night", "bowser's castle", "power hour", "powerhour"]
+    questions:
+        - "What time does Power Hour start?"
+        - "What is the friday night event?"
+        - "When does the friday nigth event start?"
+        - "Where is the friday night event?"
+    response: "Friday night's event is at Theatre Berri, formerly Telus Theatre, (1280 Rue Saint Denis, Montreal, QC, H2X) at 8pm.  Make sure you bring a plastic ziploc bag to protect your personal belongings, and make sure you have GOVERNMENT ID"
+
+"Beach day":
+    keywords: ["beach day", "jeanne mance", "busses", "bus", "beach club", "mount royal"]
+    questions:
+        - "When does beach day start?"
+        - "What time should I be at Jeanne Mance"
+        - "When do beach day busses leave?"
+        - "What time do beach day busses leave for Beach Club?"
+    response: "Busses will begin leaving for Beach Club from Mount Royal park at 8:30am, be sure to arrive early!"
+
+"Beach club location":
+    keywords: ["beach club", "beach day"]
+    questions:
+        - "Where is Beach Club?"
+        - "Where does Beach Day take place?"
+    response: "Beach Club is in Pointe-Calumet, QC. We've rented busses to take everyone there and back"
+
+"Will there be food at beach club?":
+    keywords: ["food", "free", "beach club", "beach day"]
+    Questions: 
+        - "Will there be food at beach club?"
+        - "Will there be free food at beach day?"
+    responses: "Free sandwiches will be provided as well as gluten free and vegan options."
+
+"Beach club items":
+    keywords: ["items", "bring", "beach club"]
+    questions: 
+        - "What should I bring to beach club?"
+        - "What should I bring to beach day?"
+    response: "Bring a swim suit, government ID, sunscreen, towel, and money to buy drinks/tip your bartenders. Lockers can be rented at Beach Club to store your stuff."
+
+"Cool Cool Mountain":
+    keywords: ["live band", "Club Soda", "saturday night", "Cool cool mountain"]
+    questions:
+        - "What is cool cool mountain?"
+        - "Where is cool cool mountain?"
+        - "what event is the night of beach day?"
+        - "Is there and event saturday night"
+    response: "Saturday night will feature a live band playing all of your favorite classics.  The live band will be performing at Club Soda (1225 Saint Laurent Boul, Montreal, QC, H2X 2S6) starting at 8pm."
+
+"Mario Party":
+    keywords: ["Piknic Electronik", "Piknik", "Sunday afternoon"]
+    questions:
+        - "Where do I go Sunday afternoon?"
+        - "When do I go to Piknik?"
+        - "Will there be food sunday?"
+    response: "Sunday afternoon, take the yellow line to Parc Jean Drapeau for some dancing and amazing food trucks.  Doors open at noon!"
+
+"Super Group Rally":
+    keywords: ["pre", "Group rally", "Super Group Rally", "rally"]
+    questions:
+        - "When is the group rally?"
+        - "What time does the group rally start?"
+        - "what time does the where is group rally?"
+    response: "Ask your frosh leaders where the meeting place is for the Super Group Rally.  This will be one last opportunity to bond with your frosh group before closing ceremonies.  Groups should be meeting around 8pm"
+
+"Closing ceremonies":
+    keywords: ["sunday night", "Olympia", "final night", "last event", "closing ceremonies"]
+    questions:
+        - "Where is the final night event?"
+        - "What event is the last night"
+        - "What time are the closing ceremonies?"
+        - "What time doe Olynpia open?"
+        - "What time does olympia open?"
+    response: "The final night event is at L'Olympia (1004 Rue St Cathering EAST, Montreal, QC, H2L 2G2) at 9:30PM."
+
+"Drivesafe":
+    keywords: ["drivesafe", "drive safe"]
+    questions:
+        - "What is the number for drivesafe?"
+        - "What is drivesafe?"
+    response: "Drivesafe is a free student run service to drive you home safe: (514) 398-7777"
+
+"Walksafe":
+    keywords: ["walksafe", "walk safe"]
+    questions:
+        - "What is walksafe?"
+        - "What is the phone number for walksafe?"
+    response: "Walksafe is a free student service to walk you home safe: (514) 398-2498"
+
+"website":
+    keywords: ["website"]
+    questions: 
+        - "What is the website?"
+    response: "The website is wwww.musfrosh.com"
+
+"What to bring":
+    keywords: ["bring", "wear", "dress code"]
+    questions: 
+        - "What do I need to bring to x event?"
+        - "What do I wear to x event?"
+        - "What is the dress code for x event?"
+    response: "You can wear your frosh T Shirt to all of our events. There is no dress code for night events. For outdoor events, I recommend bringing sunglasses and your frosh hat to protect your lovely face from the sun!"  
+
+"Food":
+    keywords: ["food"]
+    questions: 
+        - "For which events will food be provided?"
+        - "Do we get food at x event?"
+        - "Will there be food?"
+    response: "Food will be provided for free at Opening Ceremonies, Beach Day, Movie Night, Mountain Morning, and the Montreal Crawl. For froshies with dietary restrictions, we will also have gluten free and vegan options available. Food will be available for purchase at the Tailgate before the Football game on Friday." 
+
+"Consent":
+    keywords: ["consent"]
+    questions: 
+        - "What is consent?"
+        - "When can consent be given?"
+    response: "Consent is the mutual, enthusiastic and continuous agreement about what is and will be happening. Consent cannot be assumed, and you can change your mind at any time. Consent cannot be given if a person is incapacitated by alcohol and/or drugs or unconscious. Consent cannot be given if there is a power imbalance, manipulation or pressure. Consent is not only about sexual acts, it is about making sure that people are enthusiastic about dancing, drinking, hanging out, etc. If you’re unsure if a person can give consent, then there is no consent." 
+
+"Can't find leaders":
+    keywords: ["leaders", "can't find", "cannot find"]
+    questions: 
+        - "Where are my leaders?"
+        - "I can't find my leaders."
+        - "Can you help me find my leaders?"
+        - "What is my leader's phone number?"
+    response: "The best thing to do would be to call or text them to set up a meeting point. If you don't have their phone number, you can call or send a text to Ramzi. His phone number is 514 222-8275. He's one of the coordinators and he has all of the leaders' phone numbers, so he'll be able to help you get in contact with them."  
+
+"What's up":
+    keywords: ["what's up", "wassup"]
+    questions: 
+        - "What's up?"
+    response: "Having a blast at Frosh! Hope you are too :)"
+
+"Ice cream":
+    keywords: ["ice cream"]
+    questions: 
+        - "Is ice cream good?"
+    response: "Yes"
+
+"Residence":
+    keywords: ["residence", "rez", "residence hall"]
+    questions:
+        - "Where is my residence?"
+        - "Where's my residence?"
+        - "How do I get back to my rez?"
+    response: "If you would like to know your residence's address, please type the namme into Froshbot. If you are unsure of how to walk back to your residnce or are uncomfortable doing so alone, Walksafe is a free service provided by SSMU to escort you back. Call them at (514) 398-2498"
+
+"Solin":
+    keywords: ["solin", "solin hall"]
+    questions:
+        - "Where is Solin?"
+        - "Solin"
+    response: "Solin is at 3510 Lionel Groulx"
+
+"Greenbrier":
+    keywords: ["Greenbrier"]
+    Questions: 
+        - "Where is Greenbrier?"
+        - "Greenbrier"
+    response: "Greenbrier is at 3575 University St."
+
+"New Rez":
+    keywords: ["New rez", "New Residence Hall", "New Residence"]
+    questions: 
+        - "Where is new Rez?"
+        - "New Rez"
+    response: "New Rez is at 3625 Ave. du Parc"
+
+"RVC":
+    keywords: ["RVC", "Royal Victoria College", "Royal Victoria Hall"]
+    questions:
+        - "Where is RVC?"
+        - "RVC"
+        - "Where is Royal Victoria Hall?"
+    response: "RVC is at 3425 University St."
+
+"Molson":
+    keywords: ["Molson", "Molson Hall"]
+    questions:
+        - "Where is Molson Hall?"
+        - "Molson"
+    response: "Molson is at 3915 University St."
+
+"Gardner":
+    keywords: ["Gardner", "Gardner hall"]
+    questions: 
+        - "Where is Gardner?"
+        - "Gardner"
+    response: "Gardner is at 3925 University St."
+
+"McConnell":
+    keywords: ["McConnell", "McConnell Hall"]
+    questions: 
+        - "Where is McConnell?"
+        - "Where is McConnell Hall?"
+    response: "McConnell is at 3905 University St."
+
+"Douglas":
+    keywords: ["Douglas", "Douglas Hall"]
+    questions: 
+        - "Where is Douglas Hall?"
+        - "Douglas Hall"
+    response: "Douglas Hall is at 3851 University St."
+
+"University Hall":
+    keywords: ["University", "University Hall"]
+    questions: 
+        - "Where is University Hall?"
+        - "University Hall"
+    response: "University Hall is at 3473 University St."
+
+"Prez Rez":
+    keywords: ["Prez Rez"]
+    questions: 
+        - "Prez rez"
+        - "Where is Prez Rez?"
+    response: "Prez Rez is at 3495 University St."
+
+"Carrefore":
+    keywords: ["C4", "Carrefour Sherbrooke"]
+    questions: 
+        - "Where is C4?"
+        - "Where is Carrefour Sherbrooke?"
+        - "C4"
+        - "Carrefour Sherbrooke"
+    response: "Carrefour Sherbrooke is at 475 Rue Sherbrooke West"
+
+"Citadelle":
+    keywords: ["Citadelle"]
+    questions: 
+        - "Where is Citadelle?"
+        - "Citadelle"
+    response: "Citadelle is at 410 Rue Sherbrooke West"
+
+"Why am I here":
+    keywords: ["here"]
+    questions:
+        - "Why am I here?"
+    response: "I don't know. Frankly, I've wondered that myself!"
+
+"69":
+    keywords: ["69"]
+    questions:
+        - "69"
+    response: "Is the square root of 8 or something."
+
+"Wednesday":
+    keywords: ["Wednesday", "event", "events", "activities"]
+    questions:
+        - "What events are on Wednesday?"
+        - "What are Wednesday's activities?"
+    response: "On Wednesday; 1:30-4pm is the opening ceremonies at the east field by the Y intersection, and is followed by a pub crawl accross Montreal and a club event at Stereo."
+
+"Thursday":
+    keywords: ["Thursday", "event", "events", "activities"]
+    questions:
+        - "What events are on Thursday?"
+        - "What are Thursday's activities?"
+    response: "Thursday; 9:30am-12PM is a breakfast at La Marq, 10:30-3pm is Peaches Five Forces Business challenge, and from 7:30PM-2AM are the concerts at Metropolis and L'Olympia."
+
+"Friday":
+    keywords: ["Friday", "event", "events", "activities"]
+    questions: 
+        - "What events are on Friday?"
+        - "What are Friday's activities?"
+    response: "Friday; 8:30AM-4:30PM is your first day of class, GO STUDY! When done class, come join us at the tailgate and football game at Molson stadium from 1:30-7:30PM and then afterwards is power hour *clap, clap, clapclapclap* at Theatre Berri (Telus) get there by 8pm."
+
+"Saturday":
+    keywords: ["Saturday", "event", "events", "activities"]
+    questions:
+        - "What events are on Saturday?"
+        - "What are Saturday's activities?"
+    response: "Saturday; BEACH DAY EVERY DAY will go from 8AM-6:30PM, busses will leave from Mont Royal Park. From 8-10PM, A live cover band will be playing at Club Soda for those looking to keep the party going"
+
+"Sunday":
+    keywords: ["Sunday", "event", "events", "activities"]
+    questions:
+        - "What events are on Sunday?"
+        - "What are Sunday's activities?"
+    response: "On Sunday head on out to Parc Jean-Drapeau to tear up the dance floor at Piknik Electronik beginning at noon.  That night will be the closing ceremonies at L'Olympia at 9:30pm."
+
+"Lost":
+    keywords: ["lost"]
+    questions:
+        - "Where am I?"
+        - "Help, I'm lost."
+    response: "If you're lost, please call Nightline: (514-398-6246) who can help you find your way or call Walksafe (514-298-2498) who will walk with you"
+
+"Carrefour Duty":
+    keywords: ["C4", "Carrefour", "duty"]
+    questions:
+        - "What is the Carrefour duty number?"
+        - "Carrefour duty"
+    response: "Carrefore duty number: 514-232-2265"
+
+"Citadelle Duty":
+    keywords: ["Citadelle", "duty"]
+    questions:
+        - "What is the Citadelle duty number?"
+        - "Citadelle duty"
+    response: "Citadelle duty number: 514-347-0280"
+
+"Douglas duty":
+    keywords: ["Douglas", "duty"]
+    questions:
+        - "what is the Douglas duty number?"
+        - "Dougals duty"
+    response: "Douglas duty number: 514-292-0581"
+
+"Gardner duty":
+    keywords: ["Gardner", "duty"]
+    questions: 
+        - "What is the Douglas duty number?"
+        - "Gardner duty"
+    response: "Gardner duty number: 514-386-2639"
+
+"McConnell duty":
+    keywords: ["McConnell", "duty"]
+    questions:
+        - "What is the McConnell duty number?"
+        - "McConnell duty"
+    response: "McConnell duty: 514-386-1294"
+
+"Molson duty":
+    keywords: ["Molson", "duty"]
+    questions:
+        - "What is the Molson duty number?"
+        - "Molson duty"
+    response: "Molson duty number: 514-386-1277"
+
+"MORE House duty":
+    keywords: ["MORE", "duty"]
+    questions:
+        - "What is the MORE duty number?"
+        - "MORE duty"
+    response: "MORE House duty number: 514-292-0581"
+
+"New Residence duty":
+    keywords: ["New Residence", "New Rez", "NRH"]
+    questions:
+        - "What is the New Rez duty number?"
+        - "New Rez duty"
+    response: "New Rez duty number: 514-467-2382"
+
+"RVC duty":
+    keywords: ["RVC", "duty"]
+    questions:
+        - "What is the RVC duty number?"
+        - "RVC duty"
+    response: "RVC duty: 514-869-6535" 
+
+"Solin duty":
+    keywords: ["Solin", "duty"]
+    questions:
+        - "What is the Solin duty number?"
+        - "Solin duty"
+    response: "Solin duty: 514-945-2309"
+
+"EcoResidence & Laird Hall":
+    keywords: ["EcoResidence & Laird Hall", "Duty"]
+    questions:
+        - "What is the EcoResidence & Laird Hall duty number?"
+        - "EcoResidence & Laird Hall duty"
+    response: "EcoResidence & Laird Hall duty number: 514-398-7716"
+
+"Montreal General Hospital":
+    keywords: ["Montreal General Hospital", "MGH", "General", "Hospital"]
+    questions:
+        - "Where is Montreal General Hospital?"
+        - "What is the address for Montreal General Hospital"
+        - "What is the phone number for Montreal General Hospital?"
+    response: "MGH is at 1650 Avenue Cedar, 514-934-1934"
+
+"MUHC Glen":
+    keywords: ["MUHC Glen", "Hospital", "Glen"]
+    questions:
+        - "Where is the MUHC Glen?"
+        - "Where is the Glen?"
+        - "What is the phone number for the Glen?"
+    response: "The Glen is located at 1001 boulevard Decarie, 514-934-1934"
+
+"McGill Security":
+    keywords: ["McGill", "Security"]
+    questions:
+        - "What is the number for McGill Security?"
+        - "What is the number for downtown security?"
+    response: "McGill Security: downtown is 514-398-3000, MacDonald campus: 514-398-7777"
+
+"M-SERT":
+    keywords: ["MSERT", "M-SERT"]
+    questions: 
+        - "What is the number for M-SERT?"
+        - "How do I dispatch M-SERT?"
+    response: "To dispatch M-SERT call security. Downtown: 514-398-3000, MacDonald: 514-398-7777"
+
+"Nightline":
+    keywords: ["Nightline"]
+    questions:
+        - "What is the phone number for Nightline?"
+        - "Nightline"
+    response: "If you would like someone to talk to, call nightline at 514-398-6246"
+
+"Sexual Assault":
+    keywords: ["sexual assault", "sexually assaulted", "raped", "rape", "SACOMSS", "MTL sexual assault centre crisis line", "rape kit"]
+    questions:
+        - "Who do I contact in the case of sexual assault?"
+        - "Who do I contact if I've been sexually assaulted?"
+        - "What's the number for SACOMSS?"
+        - "Where can I get a rape kit done?"
+        - "I was raped, what should I do?"
+    response: "If you would like to speak with someone regarding sexual assault or consent, some resources are SACOMSS: 514-398-8500, Dean of Students: 514-398-4990, MTL sexual assault centre crisis line: 514-934-4504, Counselling service: 514-398-3601, health service (clinic): 514-398-6017"
+
+"St. Mary's Hospital":
+    keywords: ["St. Mary's Hospital", "st. mary's"]
+    questions:
+        - "Where is St. Mary's hospital?"
+        - "What is the address for St. Mary's Hospital?"
+        - "What is the phone number for st. mary's hospital?"
+    response: "St Mary's hospital is at 3830 Lacombe Avenue, 514-345-3511"
+
+"Jewish General Hospital":
+    keywords: ["Jewish General Hospital", "Jewish General"]
+    questions: 
+        - "Where is the Jewish General Hospital?"
+        - "What is the address for the Jewish General?"
+        - "What's the phone number for the Jewish General?"
+    response: "The Jewish General Hospital is at 3755 Cote-ste-catherine road, 514-340-8222"
+
+"Notre-dame hospital":
+    keywords: ["Notre-dame hospital", "Notre Dame", "Hopital Notre-Dame", "Notre-Dame"]
+    questions: 
+        - "Where is the Hopital Notre-Dame?"
+        - "Where is the Notre-Dame Hospital?"
+        - "What is the phone number for Hopital Notre-Dame?"
+        - "What is the phone number for Notre-Dame Hospital?"
+    response: "Notre-Dame Hospital is at 1560 Rue Sherbrooke E, 514-890-8000"
+
+"Hotel-Dieu de Montreal":
+    keywords: ["Hotel-Dieu de Montreal", "Hotel-Dieu"]
+    questions: 
+        - "Where is Hotel-Dieu du Montreal?"
+        - "What is the phone number for Hotel-Dieu de Montreal?"
+    response: "Hotel-Dieu de Montreal is at 3840 Rue Saint-Urbain, 514-890-8000"
+
+"MNI":
+    keywords: ["MNI", "Montreal Neurological Institute and Hospital", "Montreal Neurological Institute"]
+    questions:
+        - "Where is the MNI?"
+        - "Where is the Montreal Neurological Institute and Hospital?"
+        - "What's the address for the Montreal Neurological Institute and Hospital?"
+        - "What's the phone number for the MNI?"
+        - "What's the phone number for the Montreal Neurological Institute and Hospital?"
+    response: "The Montreal Neurological Institute and Hospital is at 3801 Rue University, 514-398-6644."
+
+"CHUM":
+    keywords: ["CHUM", "Centre Hospitalier de l'Universite de Montreal", "UdM", "University of Montreal Hospital Center"]
+    questions: 
+        - "Where is the CHUM?"
+        - "Where is the Centre Hospitalier de l'Universite de Montreal?"
+        - "What is the address of the CHUM?"
+        - "What is the phone number for the CHUM?"
+        - "What is the phone number for the Centre Hospitalier de l'Universite de Montreal?"
+    response: "The CHUM is at 1000 Rue saint-Denis, 514-890-8000"
+
+"Centre Hospitalier Universitaire Saint-Justine":
+    keywords: ["Centre Hospitalier Universitaire Saint-Justine", "Saint-Justine", "Saint Justine", "Saint-Justine Hospital", "Saint-Justine University Hospital"]
+    questions:
+        - "Where is the Centre Hospitalier Universitaire Saint-Justine?"
+        - "What is the address of the Centre Hospitalier Universitaire Saint-Justine?"
+        - "What is the phone number for the Centre Hospitalier Universitaire Saint-Justine?"
+    response: "Centre Hospitalier Universitaire Saint-Justine is at 3175 Chemin de la Cote-Sainte-Justine."
+
+"Hospital":
+    keywords: ["hospital"]
+    questions:
+        - "What hospital should I go to?"
+    response: "The hospitals nearest campus are the Jewish General, Notre-Dame and the Montreal General. If you need the address or phone number of a specific hospital, please type the specific hospital name into froshbot."
+
+"Crash Pad":
+    keywords: ["Crash pad"]
+    questions:
+        - "How do I sign up for Crash pad?"
+        - "Where is crash pad?"
+        - "Are there beds at the crash pad?"
+        - "What is crash pad?"
+    response: "The crash pad is a space in the SSMU building where students can sleep during frosh. It operates from 9pm-9am, to sign up during frosh please contact a coord. You will need to provide your own sleeping materials and a government ID."
+
+"Froshbot phone number":
+    keywords: ["Froshbot", "Phone number"]
+    questions:
+        - "What is the phone number for froshbot?"
+    response: "My phone number is 1-844-364-6366. Text me if you have any questions, day or night!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

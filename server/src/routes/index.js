@@ -7,6 +7,7 @@ var question_routes_1 = require('./question_routes');
 var util_routes_1 = require('./util_routes');
 var metrics_routes_1 = require('./metrics_routes');
 var twilio_routes_1 = require('./twilio_routes');
+var yaml_routes_1 = require('./yaml_routes');
 var RouteBinder = (function () {
     function RouteBinder() {
     }
@@ -22,6 +23,7 @@ var RouteBinder = (function () {
         util_routes_1.UtilRoutes.bind(router);
         metrics_routes_1.MetricsRoutes.bind(router);
         twilio_routes_1.TwilioRoutes.bind(router);
+        yaml_routes_1.YamlRoutes.bind(router);
     };
     return RouteBinder;
 }());

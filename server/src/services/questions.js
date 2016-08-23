@@ -5,7 +5,6 @@ function hitToQ(hit) {
         var q = _a[_i];
         q_arr.push(q.string);
     }
-    console.log(q_arr);
     return {
         _index: hit._index,
         _type: hit._type,
