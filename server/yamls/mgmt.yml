@@ -18,7 +18,7 @@
 
 "Power Up":
     keywords: ["La Marq 515", "thursday morning", "thursday breakfast", "Power Up"]
-    Questions:
+    questions:
         - "When is the Thursday morning breakfast?"
         - "Where is the thursday breakfast?"
         - "Will there be gluten free/vegan options at la marq?"
@@ -34,7 +34,7 @@
 
 "Mushroom Cup":
     keywords: ["bar crawl", "Mushroom Cup"]
-    Questions: 
+    questions: 
         - "When is the bar crawl?"
         - "When does the mushroom Cup start?"
         - "Where is the bar crawl?"
@@ -77,7 +77,7 @@
 
 "CnP":
     keywords: ["Carlos and Pepe's", "CnP"]
-    questionns:
+    questions:
         - "Where is Carlos and Pepes located?"
         - "What is the address for Carlos and Pepes"
     response: "Carlos and Pepes is at 1420 Rue Peel, Montreal, QC, H3A 1S8"
@@ -164,7 +164,7 @@
 
 "Dokey Kong's Jungle":
     keywords: ["Donkey Kong's Jungle", "thursday night", "concert", "start", "open", "time"]
-    Questions: 
+    questions: 
         - "Where is the Donkey Kong's Jungle concert?"
         - "Where is the thursday night concert?"
         - "When does the thursday night concernt start?"
@@ -217,7 +217,7 @@
 
 "Football game":
     keywords: ["football", "playing", "teams"]
-    Questions: 
+    questions: 
         - "Who is playing the football game?"
         - "Who is McGill playing?"
         - "What teams are playing in the football game?"
@@ -250,10 +250,10 @@
 
 "Will there be food at beach club?":
     keywords: ["food", "free", "beach club", "beach day"]
-    Questions: 
+    questions: 
         - "Will there be food at beach club?"
         - "Will there be free food at beach day?"
-    responses: "Free sandwiches will be provided as well as gluten free and vegan options."
+    response: "Free sandwiches will be provided as well as gluten free and vegan options."
 
 "Beach club items":
     keywords: ["items", "bring", "beach club"]
@@ -378,7 +378,7 @@
 
 "Greenbrier":
     keywords: ["Greenbrier"]
-    Questions: 
+    questions: 
         - "Where is Greenbrier?"
         - "Greenbrier"
     response: "Greenbrier is at 3575 University St."

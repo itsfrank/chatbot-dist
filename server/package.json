@@ -11,7 +11,7 @@
     "stage": "elasticsearch | mongod | env CCBOT_ENV='local' node src/server.js'",
     "test": "elasticsearch -Des.path.data=${path.home}/test_data -Des.http.port=9999 | mongod | env CCBOT_ENV='test' mocha -w test/testrunner.ts",
     "test-cover": "mongod | env CCBOT_DB='ccdb-test' env CCBOT_USER='ccbot69' env CCBOT_PWD='testpass' env CCBOT_PORT='6868' istanbul cover node_modules/mocha/bin/_mocha",
-    "build": "tsc || copyfiles package.json ../www/server",
+    "build": "tsc && copyfiles package.json ../www/server && copyfiles yamls/mgmt.yml ../www/server && copyfiles yamls/sci.yml ../www/server",
     "clean": "rm -rf built",
     "postinstall": "typings install",
     "dev:client": " webpack-dev-server --content-base client/"
@@ -42,7 +42,8 @@
     "q": "^1.4.1",
     "request": "^2.74.0",
     "source-map-support": "^0.4.1",
-    "twilio": "^2.9.2"
+    "twilio": "^2.9.2",
+    "yamljs": "^0.2.8"
   },
   "devDependencies": {
     "chai": "^3.5.0",
