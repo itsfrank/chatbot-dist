@@ -3,12 +3,10 @@ var Elasticsearch = require('elasticsearch');
 var Faculties = require('../services/faculties');
 var Utils = require('./utils');
 var question_routes_1 = require('../routes/question_routes');
-var deleteByQuery = require('elasticsearch-deletebyquery');
 function connect(host, port, loglevel) {
     exports.elasticsearch = new Elasticsearch.Client({
         host: host + ':' + port,
-        log: loglevel,
-        plugins: [deleteByQuery]
+        log: loglevel
     });
 }
 exports.connect = connect;

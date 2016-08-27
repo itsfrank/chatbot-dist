@@ -2,7 +2,7 @@
 var alias_routes_1 = require('./alias_routes');
 var ask_routes_1 = require('./ask_routes');
 var data_routes_1 = require('./data_routes');
-var emergency_numbers_routes_ts_1 = require('./emergency-numbers_routes.ts');
+var emergency_numbers_routes_1 = require('./emergency-numbers_routes');
 var facebook_routes_1 = require('./facebook_routes');
 var question_routes_1 = require('./question_routes');
 var util_routes_1 = require('./util_routes');
@@ -19,7 +19,7 @@ var RouteBinder = (function () {
         alias_routes_1.AliasRoutes.bind(router);
         ask_routes_1.AskRoutes.bind(router);
         data_routes_1.DataRoutes.bind(router);
-        emergency_numbers_routes_ts_1.EmergencyNumbersRoutes.bind(router);
+        emergency_numbers_routes_1.EmergencyNumbersRoutes.bind(router);
         facebook_routes_1.FacebookRoutes.bind(router);
         question_routes_1.QuestionRoutes.bind(router);
         util_routes_1.UtilRoutes.bind(router);
