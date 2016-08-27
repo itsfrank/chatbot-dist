@@ -4,6 +4,7 @@ var question_routes_1 = require('./question_routes');
 var Faculties = require('../services/faculties');
 var Utils = require('../services/utils');
 var Metrics = require('../services/metrics');
+var Twilio = require('./twilio_routes');
 var AskRoutes = (function () {
     function AskRoutes() {
     }
@@ -21,6 +22,9 @@ function askQuestion(req, res) {
     console.log(req.subdomains);
     questionResponse(index, req.query.q, function (response, found, emergency) {
         if (emergency) {
+            Twilio.sendEmergencySms(index, "unknown (website)", req.query.q, function (responseMsg) {
+                res.send(responseMsg);
+            });
         }
         else {
             Metrics.updateMetrics(index, found, false, req.query.q);
@@ -28,6 +32,24 @@ function askQuestion(req, res) {
         }
     });
 }
+function preProcessQuestion(question) {
+    question = question
+        .replace('today', getDayName())
+        .replace('tomorrow', getDayName(1))
+        .replace('yesterday', getDayName(-1))
+        .replace('tonight', getDayName() + ' night')
+        .replace('this evenning', getDayName() + ' night')
+        .replace('this morning', getDayName() + ' morning')
+        .replace('this afternoon', getDayName() + ' afternoon');
+    return question;
+}
+function getDayName(offset) {
+    if (!offset)
+        offset = 0;
+    var day = (new Date().getDay() + offset) % 7;
+    return dayNames[day];
+}
+var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 function questionResponse(index, question, callback) {
     if (!question || question == '')
         callback('You must ask a question!', false, false);
@@ -35,6 +57,7 @@ function questionResponse(index, question, callback) {
         callback(null, false, true);
     }
     else {
+        question = preProcessQuestion(question);
         elasticsearch_1.elasticsearch.search({
             index: index,
             type: question_routes_1.TYPE_NAME,

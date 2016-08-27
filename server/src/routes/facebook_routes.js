@@ -1,5 +1,6 @@
 "use strict";
 var request = require('request');
+var FB = require('fb');
 var Ask = require('./ask_routes');
 var Faculties = require('../services/faculties');
 var Metrics = require('../services/metrics');
@@ -78,6 +79,19 @@ function receivedMessage(event, faculty) {
 function sendTextMessage(faculty, recipientId, messageText) {
     Ask.questionResponse(faculty, messageText, function (response, found, emergency) {
         if (emergency) {
+            FB.api("/" + recipientId, function (response) {
+                if (response && !response.error) {
+                    var messageData = {
+                        recipient: {
+                            id: recipientId
+                        },
+                        message: {
+                            text: JSON.stringify(response)
+                        }
+                    };
+                    callSendAPI(faculty, messageData);
+                }
+            });
         }
         else {
             Metrics.updateMetrics(faculty, found, false, messageText);

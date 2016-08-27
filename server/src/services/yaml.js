@@ -11,6 +11,7 @@ var Yamljs = require('yamljs');
 var Utils = require('./utils');
 var QRoutes = require('../routes/question_routes');
 var Faculties = require('./faculties');
+var elasticsearch_1 = require('./elasticsearch');
 function reloadYaml(faculty_name, callback) {
     var file = fs.readFileSync('./yamls/' + Faculties.FacultyMap.subdomains[faculty_name] + '.yml').toString();
     var yaml = Yamljs.parse(file);
@@ -35,6 +36,35 @@ function reloadYaml(faculty_name, callback) {
     });
 }
 exports.reloadYaml = reloadYaml;
+function resetYaml(faculty_name, callback) {
+    console.log('reset started');
+    var fac_code = Faculties.FacultyMap.subdomains[faculty_name];
+    var file = fs.readFileSync('./yamls/' + fac_code + '.yml').toString();
+    var yaml = Yamljs.parse(file);
+    var questions = getQuestions(yaml);
+    var errors = [];
+    var successes = 0;
+    var res = {
+        status: function () { return this; },
+        json: function (o) { errors.push(o); },
+        send: function () { successes++; }
+    };
+    elasticsearch_1.resetIndex(fac_code, function () {
+        console.log('reset');
+        Utils.forAsync(questions.length, function (index, done) {
+            var q = questions[index];
+            var req = {
+                body: q,
+                subdomains: [faculty_name]
+            };
+            console.log('posting ' + q.name);
+            QRoutes.postQuestion(req, res);
+        }, function (aborted) {
+            callback({ successful: successes, errors: errors });
+        });
+    });
+}
+exports.resetYaml = resetYaml;
 function getQuestions(yaml) {
     var result = [];
     for (var name in yaml) {

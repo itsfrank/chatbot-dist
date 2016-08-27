@@ -2,6 +2,7 @@
 var Ask = require('./ask_routes');
 var Metrics = require('../services/metrics');
 var Faculties = require('../services/faculties');
+var emergency_numbers_1 = require('../models/emergency-numbers');
 var TwilioRoutes = (function () {
     function TwilioRoutes() {
     }
@@ -19,6 +20,9 @@ function twilioWebhook(req, res) {
     var from = req.body.From;
     Ask.questionResponse(faculty, message, function (response, found, emergency) {
         if (emergency) {
+            Twilio.sendEmergencySms(faculty, from + " (sms)", message, function (responseMsg) {
+                sendSMS(from, to, responseMsg);
+            });
         }
         else {
             Metrics.updateMetrics(faculty, found, true, message);
@@ -44,4 +48,19 @@ function sendSMS(to, from, message) {
         }
     });
 }
+function sendEmergencySms(faculty, sender, message, callback) {
+    emergency_numbers_1.EmergencyNumbers.find({ faculty: faculty }, function (err, numbers) {
+        if (err) {
+            callback('There was a technical error processing your message, please try to contact the staff or coords through a different means');
+        }
+        else {
+            for (var _i = 0, numbers_1 = numbers; _i < numbers_1.length; _i++) {
+                var number = numbers_1[_i];
+                sendSMS(number.number, Faculties.FacultyMap.twilio.from[faculty], "Emeregency message from " + sender + ": " + message);
+            }
+            callback('Your emergency message has been sent! Make sure you have provided enough information for us to properly assist you (location, name, etc..). If you want to provide additional information, simply send another emergency message with the additional details.');
+        }
+    });
+}
+exports.sendEmergencySms = sendEmergencySms;
 //# sourceMappingURL=twilio_routes.js.map

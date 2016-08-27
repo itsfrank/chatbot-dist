@@ -8,7 +8,7 @@
     response: "Opening ceremonies start at 1:30pm, at the East Field on campus. Have fun!"
 
 "Peaches Castle":
-    keywords: ["Stero", "peaches castle", "all ages", "Friday night"]
+    keywords: ["Stero", "peaches castle", "all ages", "Friday"]
     questions:
         - "What is the friday night event?"
         - "When does Peaches Castle start?"
@@ -163,7 +163,7 @@
     response: "Beach day every day!!! But for real, if today is not Saturday please see the welcome booklet or website (wwww.musfrosh.com) for details about today's events."
 
 "Dokey Kong's Jungle":
-    keywords: ["Donkey Kong's Jungle", "thursday night", "concert", "start", "open", "time"]
+    keywords: ["Donkey Kong's Jungle", "thursday", "concert", "start", "open", "time"]
     questions: 
         - "Where is the Donkey Kong's Jungle concert?"
         - "Where is the thursday night concert?"
@@ -188,7 +188,7 @@
     response: "L'olympia is at 1004 Rue Saint-Catherine E"
 
 "THursday artist":
-    keywords: ["playing", "artist", "Metropolis", "l'Olympia", "thursday", "thursday night", "rage stage", "hip hop stage"]
+    keywords: ["playing", "artist", "Metropolis", "l'Olympia", "thursday", "thursday", "rage stage", "hip hop stage"]
     questions:
         - "Who is playing the thursday night concert?"
         - "Who is playing L'olympia on thursday?"
@@ -224,7 +224,7 @@
     response: "McGill will be playing against our rivals Concordia. Go Redmen!! Nobody likes bumblebees anyways..."
 
 "Bowser's Castle":
-    keywords: ["friday night", "bowser's castle", "power hour", "powerhour"]
+    keywords: ["friday", "bowser's castle", "power hour", "powerhour"]
     questions:
         - "What time does Power Hour start?"
         - "What is the friday night event?"
@@ -263,7 +263,7 @@
     response: "Bring a swim suit, government ID, sunscreen, towel, and money to buy drinks/tip your bartenders. Lockers can be rented at Beach Club to store your stuff."
 
 "Cool Cool Mountain":
-    keywords: ["live band", "Club Soda", "saturday night", "Cool cool mountain"]
+    keywords: ["live band", "Club Soda", "saturday", "Cool cool mountain"]
     questions:
         - "What is cool cool mountain?"
         - "Where is cool cool mountain?"
@@ -288,12 +288,13 @@
     response: "Ask your frosh leaders where the meeting place is for the Super Group Rally.  This will be one last opportunity to bond with your frosh group before closing ceremonies.  Groups should be meeting around 8pm"
 
 "Closing ceremonies":
-    keywords: ["sunday night", "Olympia", "final night", "last event", "closing ceremonies"]
+    keywords: ["sunday", "Olympia", "final", "last", "closing ceremonies"]
     questions:
         - "Where is the final night event?"
         - "What event is the last night"
         - "What time are the closing ceremonies?"
-        - "What time doe Olynpia open?"
+        - "What time does Olynpia open?"
+        - "What is sunday night?"
         - "What time does olympia open?"
     response: "The final night event is at L'Olympia (1004 Rue St Cathering EAST, Montreal, QC, H2L 2G2) at 9:30PM."
 
