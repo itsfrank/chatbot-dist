@@ -1,15 +1,10 @@
 "use strict";
 var request = require('request');
-var FB = require('fb');
+var graph = require('fbgraph');
 var Ask = require('./ask_routes');
 var Faculties = require('../services/faculties');
 var Metrics = require('../services/metrics');
-FB.init({
-    appId: '1619624985034096',
-    status: true,
-    xfbml: true,
-    version: 'v2.7' // or v2.6, v2.5, v2.4, v2.3
-});
+graph.setAccessToken('1619624985034096');
 var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
@@ -85,21 +80,11 @@ function receivedMessage(event, faculty) {
 function sendTextMessage(faculty, recipientId, messageText) {
     Ask.questionResponse(faculty, messageText, function (response, found, emergency) {
         if (emergency) {
-            FB.api("/" + recipientId, function (response) {
-                if (response && !response.error) {
-                    var messageData = {
-                        recipient: {
-                            id: recipientId
-                        },
-                        message: {
-                            text: JSON.stringify(response)
-                        }
-                    };
-                    callSendAPI(faculty, messageData);
-                }
-                else {
-                    console.log(response);
-                }
+            graph.get("/" + recipientId, function (err, res) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log(res);
             });
         }
         else {
