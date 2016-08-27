@@ -4,6 +4,12 @@ var FB = require('fb');
 var Ask = require('./ask_routes');
 var Faculties = require('../services/faculties');
 var Metrics = require('../services/metrics');
+FB.init({
+    appId: '1619624985034096',
+    status: true,
+    xfbml: true,
+    version: 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+});
 var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
