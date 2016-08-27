@@ -91,6 +91,9 @@ function sendTextMessage(faculty, recipientId, messageText) {
                     };
                     callSendAPI(faculty, messageData);
                 }
+                else {
+                    console.log(response);
+                }
             });
         }
         else {
