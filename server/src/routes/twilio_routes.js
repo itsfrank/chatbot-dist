@@ -58,7 +58,7 @@ function sendEmergencySms(faculty, sender, message, callback) {
                 var number = numbers_1[_i];
                 sendSMS(number.number, Faculties.FacultyMap.twilio.from[faculty], "Emeregency message from " + sender + ": " + message);
             }
-            callback('Your emergency message has been sent! Make sure you have provided enough information for us to properly assist you (location, name, etc..). If you want to provide additional information, simply send another emergency message with the additional details.');
+            callback('Your emergency message has been sent! Make sure you have provided enough information for us to properly assist you (location, name, phone number, etc..). If you want to provide additional information, simply send another emergency message with the additional details.');
         }
     });
 }

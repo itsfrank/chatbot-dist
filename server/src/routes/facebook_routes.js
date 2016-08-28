@@ -1,10 +1,10 @@
 "use strict";
 var request = require('request');
-var graph = require('fbgraph');
+var FB = require('fb');
 var Ask = require('./ask_routes');
 var Faculties = require('../services/faculties');
 var Metrics = require('../services/metrics');
-graph.setAccessToken('1619624985034096');
+var Twilio = require('./twilio_routes');
 var FacebookRoutes = (function () {
     function FacebookRoutes() {
     }
@@ -80,11 +80,16 @@ function receivedMessage(event, faculty) {
 function sendTextMessage(faculty, recipientId, messageText) {
     Ask.questionResponse(faculty, messageText, function (response, found, emergency) {
         if (emergency) {
-            graph.get("/" + recipientId, function (err, res) {
-                if (err)
-                    console.log(err);
-                else
-                    console.log(res);
+            Twilio.sendEmergencySms(faculty, "unknown (facebook)", messageText, function (responseMsg) {
+                var messageData = {
+                    recipient: {
+                        id: recipientId
+                    },
+                    message: {
+                        text: responseMsg
+                    }
+                };
+                callSendAPI(faculty, messageData);
             });
         }
         else {
