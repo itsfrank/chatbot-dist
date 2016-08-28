@@ -52,11 +52,7 @@ function deleteEmergencyNumber(req, res) {
 function postEmergencyNumber(req, res) {
     var fac = Faculties.requestFaculty(req);
     req.body.faculty = fac;
-    new emergency_numbers_1.EmergencyNumbers(req.body).save(function (err) {
-        if (err)
-            Utils.sendError(res, 500, "internal", "error saving emergency number", "", err);
-        else
-            res.status(200).send();
-    });
+    new emergency_numbers_1.EmergencyNumbers(req.body).save();
+    res.status(200).send();
 }
 //# sourceMappingURL=emergency-numbers_routes.js.map
