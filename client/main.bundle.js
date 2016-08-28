@@ -32,16 +32,10 @@ webpackJsonp([0,1],[
 	var question_info_1 = __webpack_require__(125);
 	var question_edit_1 = __webpack_require__(129);
 	var emergency_list_1 = __webpack_require__(133);
-	var data_1 = __webpack_require__(137);
-	var overview_1 = __webpack_require__(139);
-	var events_1 = __webpack_require__(141);
-	var new_event_1 = __webpack_require__(145);
-	var event_info_1 = __webpack_require__(149);
-	var venues_1 = __webpack_require__(153);
-	var new_venue_1 = __webpack_require__(157);
-	var venue_info_1 = __webpack_require__(161);
-	var exact_question_new_1 = __webpack_require__(165);
-	var _404_1 = __webpack_require__(170);
+	var metrics_1 = __webpack_require__(137);
+	var stats_1 = __webpack_require__(139);
+	var unanswered_1 = __webpack_require__(143);
+	var _404_1 = __webpack_require__(145);
 	var app = Vue.extend({});
 	var router = new VueRouter();
 	router.map({
@@ -96,38 +90,14 @@ webpackJsonp([0,1],[
 	                    }
 	                }
 	            },
-	            '/dataNOT   ': {
-	                component: data_1.DataView,
+	            '/metrics': {
+	                component: metrics_1.MetricsView,
 	                subRoutes: {
-	                    '/overview': {
-	                        component: overview_1.DataOverview
+	                    '/stats': {
+	                        component: stats_1.MetricsStatsView
 	                    },
-	                    '/events': {
-	                        component: events_1.DataEvents
-	                    },
-	                    '/events/new': {
-	                        component: new_event_1.NewEventView
-	                    },
-	                    '/events/info/:event_id': {
-	                        component: event_info_1.EventInfoView
-	                    },
-	                    // '/exactquestions' : {
-	                    //     component: DataExactQuestions
-	                    // },
-	                    '/exactquestions/new': {
-	                        component: exact_question_new_1.ExactQuestionNewView
-	                    },
-	                    // '/exactquestions/info/:event_id' : {
-	                    //     component: ExactQuestionsInfoView
-	                    // },
-	                    '/venues': {
-	                        component: venues_1.DataVenues
-	                    },
-	                    '/venues/new': {
-	                        component: new_venue_1.NewVenueView
-	                    },
-	                    '/venues/info/:venue_id': {
-	                        component: venue_info_1.VenueInfoView
+	                    '/unanswered': {
+	                        component: unanswered_1.MetricsUnansweredView
 	                    }
 	                }
 	            }
@@ -39277,7 +39247,7 @@ webpackJsonp([0,1],[
 	        this.links = [
 	            new link_1.Link('Home', '/dashboard'),
 	            new link_1.Link('Data', '/dashboard/data/questions'),
-	            new link_1.Link('Metrics', '/dashboard/metrics')
+	            new link_1.Link('Metrics', '/dashboard/metrics/stats')
 	        ];
 	    }
 	    //there's probably a better way to do this...
@@ -39658,7 +39628,7 @@ webpackJsonp([0,1],[
 /* 61 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"list-group ccb-datalist\">\r\n    <div v-if=\"data.length == 0\" class=\"well\">no {{type}} in database</div>\r\n    <a v-for=\"item in data\" v-link=\"{path: basePath + item._id}\" class=\"list-group-item\">\r\n        <h4>{{item.name}}</h4>\r\n    </a>\r\n</div>"
+	module.exports = "<div class=\"list-group ccb-datalist\">\r\n    <div v-if=\"data.length == 0\" class=\"well\">no {{type}} in database</div>\r\n    <a v-for=\"item in data | orderBy 'name' | filterBy $parent.search in 'name'\" v-link=\"{path: basePath + item._id}\" class=\"list-group-item\">\r\n        <h4>{{item.name}}</h4>\r\n    </a>\r\n</div>"
 
 /***/ },
 /* 62 */
@@ -41349,6 +41319,7 @@ webpackJsonp([0,1],[
 	    function QuestionListView() {
 	        _super.apply(this, arguments);
 	        this.questions = [];
+	        this.search = '';
 	    }
 	    QuestionListView.prototype.ready = function () {
 	        this.questions = [];
@@ -41377,7 +41348,7 @@ webpackJsonp([0,1],[
 /* 118 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"ccb-questions-list-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Questions</h3>\r\n            <button v-link=\"{path : '/dashboard/data/questions/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Question</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <data-list\r\n            :data=\"questions\"\r\n            type=\"questions\"\r\n            base-path=\"/dashboard/data/questions/\"\r\n        >\r\n        </data-list>\r\n    </div>\r\n</div>"
+	module.exports = "<div id=\"ccb-questions-list-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Questions</h3>\r\n            <button v-link=\"{path : '/dashboard/data/questions/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Question</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input v-model=\"search\" type=\"text\" placeholder=\"search\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <data-list\r\n            :data=\"questions\"\r\n            type=\"questions\"\r\n            base-path=\"/dashboard/data/questions/\"\r\n        >\r\n        </data-list>\r\n    </div>\r\n</div>"
 
 /***/ },
 /* 119 */
@@ -41899,6 +41870,7 @@ webpackJsonp([0,1],[
 	            name: '',
 	            number: ''
 	        };
+	        this.search = "";
 	        this.errorMessage = '';
 	        this.successMessage = '';
 	    }
@@ -41969,7 +41941,7 @@ webpackJsonp([0,1],[
 /* 134 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"ccb-emergency-list-container\">\r\n\r\n    <modal name=\"new-number\">\r\n        <div slot=\"header\">\r\n            <strong>New Emergency Number</strong>\r\n        </div>\r\n        <div slot=\"body\">\r\n            <error-success\r\n                :error-message=\"errorMessage\"\r\n                :success-message=\"successMessage\"\r\n            ></error-success>\r\n\r\n            <label>Contact Name</label>\r\n            <input\r\n                class=\"form-control\"\r\n                v-model=\"newNumber.name\"\r\n            >\r\n            <label>Number</label>\r\n            <input\r\n                class=\"form-control\"\r\n                v-model=\"newNumber.number\"\r\n            >\r\n        </div>\r\n        <div slot=\"footer\">\r\n            <button class=\"btn btn-primary\" v-on:click=\"cancelNumber\">Close</button>\r\n            <button class=\"btn btn-success\" v-on:click=\"createNumber\">Create</button>\r\n        </div>\r\n    </modal>\r\n\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Emergency Numbers</h3>\r\n            <button type=\"button\" v-on:click=\"addNumber\" class=\"btn btn-success pull-right\">\r\n                <strong>Add Number</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n       <div class=\"list-group datalist\">\r\n            <div v-if=\"numbers.length == 0\" class=\"well\">no numbers in database</div>\r\n            <div v-for=\"item in numbers\" class=\"list-group-item\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-5\">\r\n                        <h4>{{item.name}}</h4>\r\n                    </div>\r\n                    <div class=\"col-sm-5\">\r\n                        <h4>{{item.number}}</h4>\r\n                    </div>\r\n                    <div class=\"col-sm-2\">\r\n                        <i v-on:click=\"removeNumber(item)\" class=\"fa fa-2x fa-times x-btn pull-right\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+	module.exports = "<div id=\"ccb-emergency-list-container\">\r\n\r\n    <modal name=\"new-number\">\r\n        <div slot=\"header\">\r\n            <strong>New Emergency Number</strong>\r\n        </div>\r\n        <div slot=\"body\">\r\n            <error-success\r\n                :error-message=\"errorMessage\"\r\n                :success-message=\"successMessage\"\r\n            ></error-success>\r\n\r\n            <label>Contact Name</label>\r\n            <input\r\n                class=\"form-control\"\r\n                v-model=\"newNumber.name\"\r\n            >\r\n            <label>Number</label>\r\n            <input\r\n                class=\"form-control\"\r\n                v-model=\"newNumber.number\"\r\n            >\r\n        </div>\r\n        <div slot=\"footer\">\r\n            <button class=\"btn btn-primary\" v-on:click=\"cancelNumber\">Close</button>\r\n            <button class=\"btn btn-success\" v-on:click=\"createNumber\">Create</button>\r\n        </div>\r\n    </modal>\r\n\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Emergency Numbers</h3>\r\n            <button type=\"button\" v-on:click=\"addNumber\" class=\"btn btn-success pull-right\">\r\n                <strong>Add Number</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input v-model=\"search\" type=\"text\" placeholder=\"search\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n       <div class=\"list-group datalist\">\r\n            <div v-if=\"numbers.length == 0\" class=\"well\">no numbers in database</div>\r\n            <div v-for=\"item in numbers | orderBy 'name' | filterBy search in 'name'\" class=\"list-group-item\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-5\">\r\n                        <h4>{{item.name}}</h4>\r\n                    </div>\r\n                    <div class=\"col-sm-5\">\r\n                        <h4>{{item.number}}</h4>\r\n                    </div>\r\n                    <div class=\"col-sm-2\">\r\n                        <i v-on:click=\"removeNumber(item)\" class=\"fa fa-2x fa-times x-btn pull-right\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
 /* 135 */
@@ -42032,32 +42004,30 @@ webpackJsonp([0,1],[
 	};
 	var vue_typescript_1 = __webpack_require__(36);
 	var link_1 = __webpack_require__(50);
-	var DataView = (function (_super) {
-	    __extends(DataView, _super);
-	    function DataView() {
+	var MetricsView = (function (_super) {
+	    __extends(MetricsView, _super);
+	    function MetricsView() {
 	        _super.apply(this, arguments);
 	        this.sidenavLinks = [
-	            new link_1.Link('Overview', '/dashboard/data/overview'),
-	            new link_1.Link('Exact Questions', '/dashboard/data/exactquestions/new'),
-	            new link_1.Link('Events', '/dashboard/data/events'),
-	            new link_1.Link('Venues', '/dashboard/data/venues')
+	            new link_1.Link('Stats', '/dashboard/metrics/stats'),
+	            new link_1.Link('Unanswered', '/dashboard/metrics/unanswered')
 	        ];
 	    }
-	    DataView.prototype.sidenavActiveStrat = function (link) {
+	    MetricsView.prototype.sidenavActiveStrat = function (link) {
 	        if (this.$route.path.indexOf(link.path) == 0)
 	            return true;
 	        else
 	            return false;
 	    };
-	    DataView = __decorate([
+	    MetricsView = __decorate([
 	        vue_typescript_1.VueComponent({
 	            template: __webpack_require__(138)
 	        }), 
 	        __metadata('design:paramtypes', [])
-	    ], DataView);
-	    return DataView;
+	    ], MetricsView);
+	    return MetricsView;
 	}(Vue));
-	exports.DataView = DataView;
+	exports.MetricsView = MetricsView;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -42065,7 +42035,7 @@ webpackJsonp([0,1],[
 /* 138 */
 /***/ function(module, exports) {
 
-	module.exports = "<div id=\"ccb-dashhome-view\">\r\n    <sidenav \r\n        :links=\"sidenavLinks\"\r\n        :active-strategy=\"sidenavActiveStrat\"\r\n    >\r\n        <div class=\"container\">\r\n            <router-view></router-view>\r\n        </div>\r\n    </sidenav>\r\n</div>"
+	module.exports = "<div id=\"ccb-dashhome-view\">\r\n    <sidenav \r\n        :links=\"sidenavLinks\"\r\n        :active-strategy=\"sidenavActiveStrat\"\r\n    >\r\n        <div class=\"container-fluid dash-content\">\r\n            <router-view></router-view>\r\n        </div>\r\n    </sidenav>\r\n</div>"
 
 /***/ },
 /* 139 */
@@ -42087,20 +42057,29 @@ webpackJsonp([0,1],[
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var vue_typescript_1 = __webpack_require__(36);
-	var DataOverview = (function (_super) {
-	    __extends(DataOverview, _super);
-	    function DataOverview() {
+	var MetricsStatsView = (function (_super) {
+	    __extends(MetricsStatsView, _super);
+	    function MetricsStatsView() {
 	        _super.apply(this, arguments);
+	        this.metrics = {};
 	    }
-	    DataOverview = __decorate([
+	    MetricsStatsView.prototype.ready = function () {
+	        this.$http.get('/cbot/metrics').then(function (res) {
+	            this.metrics = res.json();
+	        }, function (err) {
+	            console.log(err);
+	        });
+	    };
+	    MetricsStatsView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(140)
+	            template: __webpack_require__(140),
+	            style: __webpack_require__(141)
 	        }), 
 	        __metadata('design:paramtypes', [])
-	    ], DataOverview);
-	    return DataOverview;
+	    ], MetricsStatsView);
+	    return MetricsStatsView;
 	}(Vue));
-	exports.DataOverview = DataOverview;
+	exports.MetricsStatsView = MetricsStatsView;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
@@ -42108,1286 +42087,93 @@ webpackJsonp([0,1],[
 /* 140 */
 /***/ function(module, exports) {
 
-	module.exports = "overview"
+	module.exports = "<div id=\"ccb-stats-container\">\r\n\r\n    <h3>Bot Stats</h3>\r\n\r\n    <div class=\"h-sep\"></div>\r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-heading\">\r\n                    <h3 class=\"panel-title\">Total Questions</h3>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <h1>{{metrics.total_questions}}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-heading\">\r\n                    <h3 class=\"panel-title\">Unanswered</h3>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <h1>{{metrics.unanswered_questions}}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-4\">\r\n            <div class=\"panel panel-default\">\r\n                <div class=\"panel-heading\">\r\n                    <h3 class=\"panel-title\">SMS</h3>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <h1>{{metrics.sms_questions}}</h1>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ },
 /* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var DataEvents = (function (_super) {
-	    __extends(DataEvents, _super);
-	    function DataEvents() {
-	        _super.apply(this, arguments);
-	        this.events = [];
-	    }
-	    DataEvents.prototype.init = function () {
-	        this.$http.get('/cbot/event').then(function (res) {
-	            this.events = res.json();
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    DataEvents = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(142),
-	            style: __webpack_require__(143)
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], DataEvents);
-	    return DataEvents;
-	}(Vue));
-	exports.DataEvents = DataEvents;
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+	// load the styles
+	var content = __webpack_require__(142);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(17)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./stats.scss", function() {
+				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./stats.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
 
 /***/ },
 /* 142 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div id=\"ccb-events-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Events</h3>\r\n            <button v-link=\"{path : '/dashboard/data/events/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Event</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <event-datalist\r\n            :events=\"events\"\r\n        ></event-datalist>\r\n    </div>\r\n</div>"
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "#ccb-stats-container h1 {\n  text-align: center;\n  margin-bottom: 30px; }\n", ""]);
+	
+	// exports
+
 
 /***/ },
 /* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var vue_typescript_1 = __webpack_require__(36);
+	var MetricsUnansweredView = (function (_super) {
+	    __extends(MetricsUnansweredView, _super);
+	    function MetricsUnansweredView() {
+	        _super.apply(this, arguments);
+	    }
+	    MetricsUnansweredView = __decorate([
+	        vue_typescript_1.VueComponent({
+	            template: __webpack_require__(144)
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], MetricsUnansweredView);
+	    return MetricsUnansweredView;
+	}(Vue));
+	exports.MetricsUnansweredView = MetricsUnansweredView;
 	
-	// load the styles
-	var content = __webpack_require__(144);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./events.sass", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./events.sass");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
 /* 144 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-events-container .top-row .top-member {\n  margin-bottom: 10px; }\n\n#ccb-events-container .top-row h3 {\n  margin: 0;\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 15px; }\n\n#ccb-events-container .top-row button {\n  vertical-align: middle; }\n\n#ccb-events-container .list-container {\n  margin-top: 15px; }\n", ""]);
-	
-	// exports
-
+	module.exports = "coming soon"
 
 /***/ },
 /* 145 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var vue_focus_1 = __webpack_require__(87);
-	var NewEventView = (function (_super) {
-	    __extends(NewEventView, _super);
-	    function NewEventView() {
-	        _super.apply(this, arguments);
-	        this.newEvent = {
-	            name: '',
-	            aliases: [],
-	            start_time: null,
-	            end_time: null,
-	            venue: null,
-	        };
-	        this.name_focus = false;
-	        this.venue_focus = false;
-	        this.venue = '';
-	        this.name_validity = {
-	            checked: false,
-	            valid: false
-	        };
-	        this.alias_input = '';
-	        this.alias_validity = [];
-	        this.venues = [];
-	        this.venue_names = [];
-	        this.errors = [];
-	        this.typeaheadExtra = {
-	            name: 'new venue...',
-	            action: function () {
-	                console.log('would have switched');
-	            }
-	        };
-	        this.start_date = new Date(Date.now());
-	        this.start_hour = '';
-	        this.start_minute = '';
-	        this.start_am = true;
-	        this.end_date = new Date(Date.now());
-	        this.end_hour = '';
-	        this.end_minute = '';
-	        this.end_am = true;
-	    }
-	    Object.defineProperty(NewEventView.prototype, "errorslength", {
-	        get: function () {
-	            return Object.keys(this.errors).length;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    NewEventView.prototype.nameChanged = function () {
-	        this.name_validity.checked = false;
-	        if (!this.newEvent.name || this.newEvent.name == '') {
-	            this.addMessageError('name', 'Missing name');
-	        }
-	        else {
-	            this.removeError('name');
-	        }
-	    };
-	    NewEventView.prototype.nameFocuseChanged = function (focused) {
-	        if (!this.newEvent.name || this.newEvent.name == '')
-	            return;
-	        if (!focused) {
-	            this.$http.get('/cbot/alias/' + this.newEvent.name).then(function (res) {
-	                var response = res.json();
-	                if (response.inUse) {
-	                    this.name_validity.valid = false;
-	                    this.addAliasError('name', response.model, response.document, this.newEvent.name);
-	                }
-	                else {
-	                    this.name_validity.valid = true;
-	                    this.removeError('name');
-	                }
-	                this.name_validity.checked = true;
-	            }, function (err) {
-	                console.log(err);
-	            });
-	        }
-	    };
-	    NewEventView.prototype.venueFocusChanged = function (focused) {
-	        if (!focused) {
-	            if (this.venue && this.venue_names.indexOf(this.venue) < 0 && this.venue != '') {
-	                this.addMessageError('venue', '\'' + this.venue + '\' is not a venue');
-	            }
-	            else if (!this.venue || this.venue == '') {
-	                this.addMessageError('venue', 'Missing venue');
-	            }
-	            else {
-	                this.removeError('venue');
-	                this.setVenueID();
-	            }
-	        }
-	    };
-	    NewEventView.prototype.addressChanged = function () {
-	        if (!this.venue || this.venue == '') {
-	            this.addMessageError('venue', 'Missing venue');
-	        }
-	        else {
-	            this.removeError('venue');
-	        }
-	    };
-	    NewEventView.prototype.setVenueID = function () {
-	        for (var i = 0; i < this.venues.length; i++) {
-	            if (this.venues[i].name == this.venue) {
-	                this.newEvent.venue = this.venues[i]._id;
-	                return;
-	            }
-	        }
-	        console.error('Venue \'' + this.venue + '\' found');
-	    };
-	    NewEventView.prototype.onStartTimeChange = function () {
-	        var hour = parseInt(this.start_hour) + (this.start_am ? 0 : 12);
-	        if (hour == 12)
-	            hour = 0;
-	        if (hour == 24)
-	            hour = 12;
-	        var minute = parseInt(this.start_minute);
-	        if (isNaN(hour) || isNaN(minute)) {
-	            this.newEvent.start_time = null;
-	        }
-	        else {
-	            this.newEvent.start_time = new Date(this.start_date.getFullYear(), this.start_date.getMonth(), this.start_date.getDate(), hour, minute);
-	            this.removeError('end-time');
-	        }
-	        if (this.newEvent.start_time && this.newEvent.end_time && this.newEvent.start_time > this.newEvent.end_time) {
-	            this.addMessageError('time', 'Start time after end time');
-	        }
-	        else {
-	            this.removeError('time');
-	        }
-	    };
-	    NewEventView.prototype.onEndTimeChange = function () {
-	        var hour = parseInt(this.end_hour) + (this.end_am ? 0 : 12);
-	        if (hour == 12)
-	            hour = 0;
-	        if (hour == 24)
-	            hour = 12;
-	        var minute = parseInt(this.end_minute);
-	        if (isNaN(hour) || isNaN(minute)) {
-	            this.newEvent.end_time = null;
-	        }
-	        else {
-	            this.newEvent.end_time = new Date(this.end_date.getFullYear(), this.end_date.getMonth(), this.end_date.getDate(), hour, minute);
-	            this.removeError('end-time');
-	        }
-	        if (this.newEvent.start_time && this.newEvent.end_time && this.newEvent.start_time > this.newEvent.end_time) {
-	            this.addMessageError('time', 'Start time after end time');
-	        }
-	        else {
-	            this.removeError('time');
-	        }
-	    };
-	    NewEventView.prototype.addAlias = function () {
-	        if (!this.alias_input)
-	            return;
-	        if (this.alias_input == '')
-	            return;
-	        if (this.newEvent.aliases.indexOf(this.alias_input.toLowerCase()) > -1)
-	            return;
-	        var index = this.newEvent.aliases.push(this.alias_input.toLowerCase());
-	        this.aliasAdded(this.alias_input.toLowerCase(), index);
-	        this.alias_input = '';
-	    };
-	    NewEventView.prototype.aliasAdded = function (alias, index) {
-	        this.$http.get('/cbot/alias/' + alias).then(function (res) {
-	            var response = res.json();
-	            if (response.inUse) {
-	                this.alias_validity.push(false);
-	                this.addAliasError(alias + '-alias$$', response.model, response.document, this.newEvent.name);
-	            }
-	            else {
-	                this.alias_validity.push(true);
-	            }
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    NewEventView.prototype.removeAlias = function (index) {
-	        this.removeError(this.newEvent.aliases[index] + '-alias$$');
-	        delete this.alias_validity[this.newEvent.aliases[index]];
-	        this.newEvent.aliases.splice(index, 1);
-	        this.alias_validity.splice(index, 1);
-	    };
-	    NewEventView.prototype.hourChanged = function (key) {
-	        var value = this[key];
-	        value = value.replace(/\D/g, '');
-	        value = parseInt(value);
-	        if (isNaN(value)) {
-	            this[key] = '';
-	            return;
-	        }
-	        if (value > 12)
-	            value = 12;
-	        this[key] = value;
-	    };
-	    NewEventView.prototype.minuteChanged = function (key) {
-	        var value = this[key];
-	        value = value.replace(/\D/g, '');
-	        value = parseInt(value);
-	        if (isNaN(value)) {
-	            this[key] = '';
-	            return;
-	        }
-	        if (value > 59)
-	            value = 59;
-	        this[key] = value;
-	    };
-	    NewEventView.prototype.addMessageError = function (value, message) {
-	        this.addError({
-	            value: value,
-	            message: message
-	        });
-	    };
-	    NewEventView.prototype.addAliasError = function (value, model, document, alias) {
-	        this.addError({
-	            value: value,
-	            model: model.toLowerCase(),
-	            conj: ModelMappings[model].conj,
-	            name: document.name,
-	            path: '/dashboard/data/' + ModelMappings[model].path + '/info/' + document._id,
-	            alias: alias
-	        });
-	    };
-	    NewEventView.prototype.addError = function (error) {
-	        for (var i = 0; i < this.errors.length; i++) {
-	            if (this.errors[i].value == error.value) {
-	                this.errors.splice(i, 1);
-	                this.errors.unshift(error);
-	                return;
-	            }
-	        }
-	        this.errors.unshift(error);
-	    };
-	    NewEventView.prototype.removeError = function (value) {
-	        for (var i = 0; i < this.errors.length; i++) {
-	            if (this.errors[i].value == value) {
-	                this.errors.splice(i, 1);
-	            }
-	        }
-	    };
-	    NewEventView.prototype.saveEvent = function () {
-	        var event_valid = true;
-	        if (!this.newEvent.name || this.newEvent.name == '') {
-	            this.addMessageError('name', 'Missing name');
-	            event_valid = false;
-	        }
-	        if (!this.newEvent.venue || this.newEvent.venue == '') {
-	            this.addMessageError('venue', 'Missing venue');
-	            event_valid = false;
-	        }
-	        if (!this.newEvent.start_time) {
-	            this.addMessageError('start-time', 'Missing start time');
-	            event_valid = false;
-	        }
-	        if (!this.newEvent.end_time) {
-	            this.addMessageError('end-time', 'Missing end time');
-	            event_valid = false;
-	        }
-	        if (event_valid) {
-	            this.$http.post('/cbot/event', this.newEvent).then(function (res) {
-	                console.log(res);
-	            }, function (err) {
-	                console.log(err);
-	            });
-	        }
-	    };
-	    NewEventView.prototype.ready = function () {
-	        this.$http.get('/cbot/venue').then(function (res) {
-	            this.venues = res.json();
-	            for (var i = 0; i < this.venues.length; i++) {
-	                this.venue_names.push(this.venues[i].name);
-	            }
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    __decorate([
-	        vue_typescript_1.Watch('onStartTimeChange'), 
-	        __metadata('design:type', Date)
-	    ], NewEventView.prototype, "start_date", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onStartTimeChange'), 
-	        __metadata('design:type', String)
-	    ], NewEventView.prototype, "start_hour", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onStartTimeChange'), 
-	        __metadata('design:type', String)
-	    ], NewEventView.prototype, "start_minute", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onStartTimeChange'), 
-	        __metadata('design:type', Boolean)
-	    ], NewEventView.prototype, "start_am", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onEndTimeChange'), 
-	        __metadata('design:type', Date)
-	    ], NewEventView.prototype, "end_date", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onEndTimeChange'), 
-	        __metadata('design:type', String)
-	    ], NewEventView.prototype, "end_hour", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onEndTimeChange'), 
-	        __metadata('design:type', String)
-	    ], NewEventView.prototype, "end_minute", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('onEndTimeChange'), 
-	        __metadata('design:type', Boolean)
-	    ], NewEventView.prototype, "end_am", void 0);
-	    __decorate([
-	        vue_typescript_1.Watch('newEvent.name'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], NewEventView.prototype, "nameChanged", null);
-	    __decorate([
-	        vue_typescript_1.Watch('name_focus'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', [Object]), 
-	        __metadata('design:returntype', void 0)
-	    ], NewEventView.prototype, "nameFocuseChanged", null);
-	    __decorate([
-	        vue_typescript_1.Watch('venue_focus'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', [Object]), 
-	        __metadata('design:returntype', void 0)
-	    ], NewEventView.prototype, "venueFocusChanged", null);
-	    __decorate([
-	        vue_typescript_1.Watch('venue'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], NewEventView.prototype, "addressChanged", null);
-	    NewEventView = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(146),
-	            style: __webpack_require__(147),
-	            directives: {
-	                focusModel: vue_focus_1.focusModel
-	            }
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], NewEventView);
-	    return NewEventView;
-	}(Vue));
-	exports.NewEventView = NewEventView;
-	var ModelMappings = {
-	    'Event': {
-	        path: 'events',
-	        conj: 'an'
-	    },
-	    'Venue': {
-	        path: 'venues',
-	        conj: 'a'
-	    }
-	};
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 146 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-new-event-container\">\r\n    <h3>New Event</h3>\r\n    <div class=\"h-sep\"></div>\r\n    <h4>Event Name</h4>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        v-focus-model=\"name_focus\"\r\n        v-model:bind=\"newEvent.name\"\r\n        class=\"form-control input-lg\"\r\n        placeholder=\"enter name\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"alias_input\" v-on:keyup.enter=\"addAlias()\" type=\"text\" class=\"form-control\" placeholder=\"add an alias\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addAlias()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-if=\"newEvent.name && newEvent.name != ''\"\r\n                class=\"label\"\r\n                v-bind:class=\"name_validity.checked ? (name_validity.valid ? 'label-success' :  'label-danger') : ''\">\r\n                {{newEvent.name.toLowerCase()}}\r\n            </span>\r\n            <span \r\n                v-for=\"(index, alias) in newEvent.aliases\"\r\n                class=\"label\"\r\n                v-bind:class=\"alias_validity[index] ? 'label-success' : alias_validity.length >= index ? '' : 'label-danger'\"\r\n            >\r\n                {{alias}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeAlias(index)\" class=\"fa fa-times alias-remove\"></i>\r\n            </span>\r\n            {{newEvent.aliases.length != 0 || (newEvent.name && newEvent.name != '') ? '' : 'none'}}\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Venue</label>\r\n    <typeahead class=\"venues-typeahead\"\r\n        :data=\"venue_names\"\r\n        placeholder=\"start typing venue name\"\r\n        :extra-option=\"typeaheadExtra\"\r\n        value-model=\"venue\"\r\n        focus-model=\"venue_focus\"\r\n    >\r\n    </typeahead>\r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-6 col-lg-4 col-xl-3\">\r\n            <label>Start Time</label>\r\n            <div>\r\n                <datepicker parent-date=\"start_date\" :autoclose=\"true\"></datepicker>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control hour\" \r\n                    placeholder=\"hh\"\r\n                    v-model=\"start_hour\"\r\n                    v-on:input=\"hourChanged('start_hour')\"\r\n                >\r\n                <span>:</span>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control minute\" \r\n                    placeholder=\"mm\"\r\n                    v-model=\"start_minute\"\r\n                    v-on:input=\"minuteChanged('start_minute')\"\r\n                    onchange=\"if(parseInt(this.value,10)<10)this.value='0'+this.value;\"\r\n                >\r\n                <button v-on:click=\"start_am = !start_am\" class=\"btn\">{{start_am? 'AM' : 'PM'}}</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-sm-6 col-lg-4 col-xl-3\">\r\n            <label>End Time</label>\r\n            <div>\r\n                <datepicker parent-date=\"end_date\" :autoclose=\"true\"></datepicker>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control hour\" \r\n                    placeholder=\"hh\"\r\n                    v-model=\"end_hour\"\r\n                    v-on:input=\"hourChanged('end_hour')\"\r\n                >\r\n                <span>:</span>\r\n                <input type=\"text\" pattern=\"[0-9]*\" class=\"form-control minute\" \r\n                    placeholder=\"mm\"\r\n                    v-model=\"end_minute\"\r\n                    v-on:input=\"minuteChanged('end_minute')\"\r\n                    onchange=\"if(parseInt(this.value,10)<10)this.value='0'+this.value;\"\r\n                >\r\n                <button v-on:click=\"end_am = !end_am\" class=\"btn\">{{end_am? 'AM' : 'PM'}}</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <button\r\n        v-on:click=\"saveEvent()\"\r\n        type=\"button\"\r\n        class=\"btn btn-success\" \r\n        v-bind:class=\"{'disabled': errors.length > 0}\"\r\n    >\r\n        Save Event\r\n    </button>\r\n    <div class=\"h-margin\"></div>\r\n    <div v-if=\"errorslength > 0\" class=\"alert alert-danger\">\r\n        <strong>Errors</strong>\r\n        <ul>\r\n            <li v-for=\"error in errors\">\r\n                <span v-if=\"!error.message\">\r\n                    Alias '{{error.alias}}' is already in use by {{error.conj}} {{error.model}}: <a class=\"alert-link\" v-link=\"{path: error.path}\">{{error.name}}</a>\r\n                </span>\r\n                <span v-if=\"error.message\">\r\n                    {{error.message}}\r\n                </span>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 147 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(148);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./new_event.sass", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./new_event.sass");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 148 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-new-event-container h3 {\n  margin-top: 0; }\n\n#ccb-new-event-container h4 {\n  margin-bottom: 5px; }\n\n#ccb-new-event-container .hour, #ccb-new-event-container .minute {\n  display: inline; }\n\n#ccb-new-event-container .hour, #ccb-new-event-container .minute {\n  width: 40px;\n  text-align: center;\n  padding-left: 6px;\n  padding-right: 6px; }\n\n#ccb-new-event-container .alias-input {\n  width: 300px;\n  margin-bottom: 5px; }\n\n#ccb-new-event-container .aliases-section .label {\n  display: inline-block;\n  margin-right: 5px; }\n\n#ccb-new-event-container .aliases-section .alias-remove:hover {\n  color: #ED5565; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var time_service_ts_1 = __webpack_require__(56);
-	var EventInfoView = (function (_super) {
-	    __extends(EventInfoView, _super);
-	    function EventInfoView() {
-	        _super.apply(this, arguments);
-	        this.event = {
-	            name: '',
-	            aliases: [],
-	            venue: {},
-	            start_time: '',
-	            end_time: ''
-	        };
-	    }
-	    Object.defineProperty(EventInfoView.prototype, "startTime", {
-	        get: function () {
-	            return time_service_ts_1.TimeService.formatEventsDate(this.event.start_time);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    Object.defineProperty(EventInfoView.prototype, "endTime", {
-	        get: function () {
-	            return time_service_ts_1.TimeService.formatEventsDate(this.event.end_time);
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    EventInfoView.prototype.init = function () {
-	        this.$http.get('/cbot/event/' + this.$route.params.event_id).then(function (res) {
-	            this.event = res.json();
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    EventInfoView = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(150),
-	            style: __webpack_require__(151)
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], EventInfoView);
-	    return EventInfoView;
-	}(Vue));
-	exports.EventInfoView = EventInfoView;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 150 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-event-info-container\">\r\n    <h3>{{event.name}}</h3>\r\n    <button v-link=\"{path : '/dashboard/data/events/edit/' + this.event._id}\" type=\"button\" class=\"btn btn-primary pull-right\">\r\n        <strong>Edit</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-pencil\"></i>\r\n    </button>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-for=\"alias in event.aliases\"\r\n                class=\"label label-primary\"\r\n            >\r\n                {{alias}}\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <h4>Basic Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <label>Venue: &nbsp;</label>\r\n        <a v-link=\"{path: '/dashboard/data/venues/info/' + event.venue._id}\"><strong>{{event.venue.name}}</strong></a>\r\n        \r\n        <br>\r\n        \r\n        <label>Address: &nbsp;</label>\r\n        <span>{{event.venue.address}}</span>\r\n        \r\n        <div class=\"h-margin\"></div>\r\n        \r\n        <label>Start Time: &nbsp;</label>\r\n        <span>{{startTime}}</span>\r\n\r\n        <br>\r\n\r\n        <label>End Time: &nbsp;</label>\r\n        <span>{{endTime}}</span>\r\n        </div>\r\n    </div>\r\n    <h4>Custom Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span class=\"font-mediumgray-dark\">coming soon...</span>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 151 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(152);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./event_info.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./event_info.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 152 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-event-info-container h3 {\n  margin: 0;\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 15px;\n  margin-top: 0; }\n\n#ccb-event-info-container h4 {\n  margin-bottom: 5px; }\n\n#ccb-event-info-container .hour, #ccb-event-info-container .minute {\n  display: inline; }\n\n#ccb-event-info-container .hour, #ccb-event-info-container .minute {\n  width: 40px;\n  text-align: center;\n  padding-left: 6px;\n  padding-right: 6px; }\n\n#ccb-event-info-container .alias-input {\n  width: 300px;\n  margin-bottom: 5px; }\n\n#ccb-event-info-container .aliases-section .label {\n  display: inline-block;\n  margin-right: 5px; }\n\n#ccb-event-info-container .aliases-section .alias-remove:hover {\n  color: #ED5565; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 153 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var DataVenues = (function (_super) {
-	    __extends(DataVenues, _super);
-	    function DataVenues() {
-	        _super.apply(this, arguments);
-	        this.venues = [];
-	    }
-	    DataVenues.prototype.init = function () {
-	        this.$http.get('/cbot/venue').then(function (res) {
-	            this.venues = res.json();
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    DataVenues = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(154),
-	            style: __webpack_require__(155)
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], DataVenues);
-	    return DataVenues;
-	}(Vue));
-	exports.DataVenues = DataVenues;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 154 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-venues-container\">\r\n    <div class=\"row top-row\">\r\n        <div class=\"col-md-12 top-member\">\r\n            <h3>Venues</h3>\r\n            <button v-link=\"{path : '/dashboard/data/venues/new'}\" type=\"button\" class=\"btn btn-success pull-right\">\r\n                <strong>New Venue</strong>\r\n                &nbsp;\r\n                <i class=\"fa fa-plus\"></i>\r\n            </button>\r\n        </div>\r\n        <div class=\"col-md-12 top-member\">\r\n            <div class=\"form-search search-only\">\r\n                  <i class=\"search-icon glyphicon glyphicon-search\"></i>\r\n                  <input type=\"text\" placeholder=\"coming soon...\" class=\"form-control search-query\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"list-container\">\r\n        <venue-datalist\r\n            :venues=\"venues\"\r\n        ></venue-datalist>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 155 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(156);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./venues.sass", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./venues.sass");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 156 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-venues-container .top-row .top-member {\n  margin-bottom: 10px; }\n\n#ccb-venues-container .top-row h3 {\n  margin: 0;\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 15px; }\n\n#ccb-venues-container .top-row button {\n  vertical-align: middle; }\n\n#ccb-venues-container .list-container {\n  margin-top: 15px; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 157 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var vue_focus_1 = __webpack_require__(87);
-	var NewVenueView = (function (_super) {
-	    __extends(NewVenueView, _super);
-	    function NewVenueView() {
-	        _super.apply(this, arguments);
-	        this.newVenue = {
-	            name: '',
-	            aliases: [],
-	            address: '',
-	        };
-	        this.name_focus = false;
-	        this.name_validity = {
-	            checked: false,
-	            valid: false
-	        };
-	        this.alias_input = '';
-	        this.alias_validity = [];
-	        this.errors = [];
-	    }
-	    Object.defineProperty(NewVenueView.prototype, "errorslength", {
-	        get: function () {
-	            return Object.keys(this.errors).length;
-	        },
-	        enumerable: true,
-	        configurable: true
-	    });
-	    NewVenueView.prototype.nameChanged = function () {
-	        this.name_validity.checked = false;
-	        if (!this.newVenue.name || this.newVenue.name == '') {
-	            this.addMessageError('name', 'No name entered');
-	        }
-	        else {
-	            this.removeError('name');
-	        }
-	    };
-	    NewVenueView.prototype.addressChanged = function () {
-	        if (!this.newVenue.address || this.newVenue.address == '') {
-	            this.addMessageError('address', 'No address entered');
-	        }
-	        else {
-	            this.removeError('address');
-	        }
-	    };
-	    NewVenueView.prototype.nameFocuseChanged = function (focused) {
-	        if (!this.newVenue.name || this.newVenue.name == '')
-	            return;
-	        if (!focused) {
-	            this.$http.get('/cbot/alias/' + this.newVenue.name).then(function (res) {
-	                var response = res.json();
-	                if (response.inUse) {
-	                    this.name_validity.valid = false;
-	                    this.addAliasError('name', response.model, response.document, this.newVenue.name);
-	                }
-	                else {
-	                    this.name_validity.valid = true;
-	                    this.removeError('name');
-	                }
-	                this.name_validity.checked = true;
-	            }, function (err) {
-	                console.log(err);
-	            });
-	        }
-	    };
-	    NewVenueView.prototype.addAlias = function () {
-	        if (!this.alias_input)
-	            return;
-	        if (this.alias_input == '')
-	            return;
-	        if (this.newVenue.aliases.indexOf(this.alias_input.toLowerCase()) > -1)
-	            return;
-	        var index = this.newVenue.aliases.push(this.alias_input.toLowerCase());
-	        this.aliasAdded(this.alias_input.toLowerCase(), index);
-	        this.alias_input = '';
-	    };
-	    NewVenueView.prototype.aliasAdded = function (alias, index) {
-	        this.$http.get('/cbot/alias/' + alias).then(function (res) {
-	            var response = res.json();
-	            if (response.inUse) {
-	                this.alias_validity.push(false);
-	                this.addAliasError(alias + '-alias$$', response.model, response.document, alias);
-	            }
-	            else {
-	                this.alias_validity.push(true);
-	            }
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    NewVenueView.prototype.removeAlias = function (index) {
-	        this.removeError(this.newVenue.aliases[index] + '-alias$$');
-	        delete this.alias_validity[this.newVenue.aliases[index]];
-	        this.newVenue.aliases.splice(index, 1);
-	        this.alias_validity.splice(index, 1);
-	    };
-	    NewVenueView.prototype.addMessageError = function (value, message) {
-	        this.addError({
-	            value: value,
-	            message: message
-	        });
-	    };
-	    NewVenueView.prototype.addAliasError = function (value, model, document, alias) {
-	        this.addError({
-	            value: value,
-	            model: model.toLowerCase(),
-	            conj: ModelMappings[model].conj,
-	            name: document.name,
-	            path: '/dashboard/data/' + ModelMappings[model].path + '/info/' + document._id,
-	            alias: alias
-	        });
-	    };
-	    NewVenueView.prototype.addError = function (error) {
-	        for (var i = 0; i < this.errors.length; i++) {
-	            if (this.errors[i].value == error.value) {
-	                this.errors.splice(i, 1);
-	                this.errors.unshift(error);
-	                return;
-	            }
-	        }
-	        this.errors.unshift(error);
-	    };
-	    NewVenueView.prototype.removeError = function (value) {
-	        for (var i = 0; i < this.errors.length; i++) {
-	            if (this.errors[i].value == value) {
-	                this.errors.splice(i, 1);
-	            }
-	        }
-	    };
-	    NewVenueView.prototype.saveVenue = function () {
-	        var can_save = true;
-	        if (!this.newVenue.name || this.newVenue.name == '') {
-	            this.addMessageError('name', 'No name entered');
-	            can_save = false;
-	        }
-	        if (!this.newVenue.address || this.newVenue.address == '') {
-	            this.addMessageError('address', 'No address entered');
-	            can_save = false;
-	        }
-	        if (can_save) {
-	            this.$http.post('/cbot/venue', this.newVenue).then(function (res) {
-	                console.log(res.json());
-	            }, function (err) {
-	                console.log(err.json());
-	            });
-	        }
-	    };
-	    __decorate([
-	        vue_typescript_1.Watch('newVenue.name'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], NewVenueView.prototype, "nameChanged", null);
-	    __decorate([
-	        vue_typescript_1.Watch('newVenue.address'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', []), 
-	        __metadata('design:returntype', void 0)
-	    ], NewVenueView.prototype, "addressChanged", null);
-	    __decorate([
-	        vue_typescript_1.Watch('name_focus'), 
-	        __metadata('design:type', Function), 
-	        __metadata('design:paramtypes', [Object]), 
-	        __metadata('design:returntype', void 0)
-	    ], NewVenueView.prototype, "nameFocuseChanged", null);
-	    NewVenueView = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(158),
-	            style: __webpack_require__(159),
-	            directives: {
-	                focusModel: vue_focus_1.focusModel
-	            }
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], NewVenueView);
-	    return NewVenueView;
-	}(Vue));
-	exports.NewVenueView = NewVenueView;
-	var ModelMappings = {
-	    'Event': {
-	        path: 'events',
-	        conj: 'an'
-	    },
-	    'Venue': {
-	        path: 'venues',
-	        conj: 'a'
-	    }
-	};
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 158 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-new-venue-container\">\r\n    <h3>New Venue</h3>\r\n    <div class=\"h-sep\"></div>\r\n    <h4>Venue Name</h4>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        v-focus-model=\"name_focus\"\r\n        v-model:bind=\"newVenue.name\"\r\n        class=\"form-control input-lg\"\r\n        placeholder=\"enter name\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"alias_input\" v-on:keyup.enter=\"addAlias()\" type=\"text\" class=\"form-control\" placeholder=\"add an alias\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addAlias()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-if=\"newVenue.name && newVenue.name != ''\"\r\n                class=\"label\"\r\n                v-bind:class=\"name_validity.checked ? (name_validity.valid ? 'label-success' :  'label-danger') : ''\">\r\n                {{newVenue.name.toLowerCase()}}\r\n            </span>\r\n            <span \r\n                v-for=\"(index, alias) in newVenue.aliases\"\r\n                class=\"label\"\r\n                v-bind:class=\"alias_validity[index] ? 'label-success' : (index < alias_validity.length ? 'label-danger' : '')\"\r\n            >\r\n                {{alias}}&nbsp;&nbsp;\r\n                <i v-on:click=\"removeAlias(index)\" class=\"fa fa-times alias-remove\"></i>\r\n            </span>\r\n            {{newVenue.aliases.length != 0 || (newVenue.name && newVenue.name != '') ? '' : 'none'}}\r\n        </div>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <label>Address</label>\r\n    <input v-model:bind=\"newVenue.address\" type=\"text\" class=\"form-control\" placeholder=\"enter venue address\">\r\n    <div class=\"h-margin\"></div>\r\n    <button\r\n        v-on:click=\"saveVenue()\"\r\n        type=\"button\"\r\n        class=\"btn btn-success\" \r\n        v-bind:class=\"{'disabled': errors.length > 0}\"\r\n    >\r\n        Save Venue\r\n    </button>\r\n    <div class=\"h-margin\"></div>\r\n    <div v-if=\"errorslength > 0\" class=\"alert alert-danger\">\r\n        <strong>Errors</strong>\r\n        <ul>\r\n            <li v-for=\"error in errors\">\r\n                <span v-if=\"!error.message\">\r\n                    Alias '{{error.alias}}' is already in use by {{error.conj}} {{error.model}}: <a class=\"alert-link\" v-link=\"{path: error.path}\">{{error.name}}</a>\r\n                </span>\r\n                <span v-if=\"error.message\">\r\n                    {{error.message}}\r\n                </span>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(160);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./new_venue.sass", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./new_venue.sass");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-new-venue-container h3 {\n  margin-top: 0; }\n\n#ccb-new-venue-container h4 {\n  margin-bottom: 5px; }\n\n#ccb-new-venue-container .hour, #ccb-new-venue-container .minute {\n  display: inline; }\n\n#ccb-new-venue-container .hour, #ccb-new-venue-container .minute {\n  width: 40px;\n  text-align: center;\n  padding-left: 6px;\n  padding-right: 6px; }\n\n#ccb-new-venue-container .alias-input {\n  width: 300px;\n  margin-bottom: 5px; }\n\n#ccb-new-venue-container .aliases-section .label {\n  display: inline-block;\n  margin-right: 5px; }\n\n#ccb-new-venue-container .aliases-section .alias-remove:hover {\n  color: #ED5565; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var VenueInfoView = (function (_super) {
-	    __extends(VenueInfoView, _super);
-	    function VenueInfoView() {
-	        _super.apply(this, arguments);
-	        this.venue = {
-	            name: '',
-	            aliases: [],
-	            address: ''
-	        };
-	    }
-	    VenueInfoView.prototype.init = function () {
-	        this.$http.get('/cbot/venue/' + this.$route.params.venue_id).then(function (res) {
-	            this.venue = res.json();
-	        }, function (err) {
-	            console.log(err);
-	        });
-	    };
-	    VenueInfoView = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(162),
-	            style: __webpack_require__(163)
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], VenueInfoView);
-	    return VenueInfoView;
-	}(Vue));
-	exports.VenueInfoView = VenueInfoView;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 162 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-venue-info-container\">\r\n    <h3>{{venue.name}}</h3>\r\n    <button v-link=\"{path : '/dashboard/data/venues/edit/' + this.venue._id}\" type=\"button\" class=\"btn btn-primary pull-right\">\r\n        <strong>Edit</strong>\r\n        &nbsp;\r\n        <i class=\"fa fa-pencil\"></i>\r\n    </button>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <div class=\"aliases-section\">\r\n        <h4>Aliases</h4>\r\n        <div class=\"well bg-lightgray-dark font-mediumgray-dark\">\r\n            <span \r\n                v-for=\"alias in venue.aliases\"\r\n                class=\"label label-primary\"\r\n            >\r\n                {{alias}}\r\n            </span>\r\n        </div>\r\n    </div>\r\n\r\n    <h4>Basic Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <label>Address: &nbsp;</label>\r\n        <span>{{venue.address}}</span>\r\n    </div>\r\n    <h4>Custom Info</h4>\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span class=\"font-mediumgray-dark\">coming soon...</span>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(164);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./venue_info.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./venue_info.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-venue-info-container h3 {\n  margin: 0;\n  display: inline-block;\n  vertical-align: middle;\n  margin-right: 15px;\n  margin-top: 0; }\n\n#ccb-venue-info-container h4 {\n  margin-bottom: 5px; }\n\n#ccb-venue-info-container .hour, #ccb-venue-info-container .minute {\n  display: inline; }\n\n#ccb-venue-info-container .hour, #ccb-venue-info-container .minute {\n  width: 40px;\n  text-align: center;\n  padding-left: 6px;\n  padding-right: 6px; }\n\n#ccb-venue-info-container .alias-input {\n  width: 300px;\n  margin-bottom: 5px; }\n\n#ccb-venue-info-container .aliases-section .label {\n  display: inline-block;\n  margin-right: 5px; }\n\n#ccb-venue-info-container .aliases-section .alias-remove:hover {\n  color: #ED5565; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 165 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Vue, $) {"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var vue_typescript_1 = __webpack_require__(36);
-	var Utils = __webpack_require__(166);
-	var ExactQuestionNewView = (function (_super) {
-	    __extends(ExactQuestionNewView, _super);
-	    function ExactQuestionNewView() {
-	        _super.apply(this, arguments);
-	        this.errorMessage = '';
-	        this.testInput = '';
-	        this.testQuestions = [];
-	        this.question = {
-	            type: 'static',
-	            input: '',
-	            matches: []
-	        };
-	        this.sdInfoOpen = false;
-	    }
-	    ExactQuestionNewView.prototype.addQuestion = function () {
-	        if (this.question.input.lastIndexOf('?') == this.question.input.length - 1) {
-	            this.question.input = this.question.input.substring(0, this.question.input.length - 1);
-	        }
-	        if (Utils.indexofObjArray(this.question.matches, 'string', this.question.input) > -1) {
-	            return;
-	        }
-	        if (this.question.type == 'dynamic') {
-	            var e = this.testRegex(this.question.input);
-	            if (e) {
-	                var e_parts = e.message.split(':');
-	                this.errorMessage = e_parts[e_parts.length - 1];
-	                return;
-	            }
-	            this.question.matches.push({
-	                type: this.question.type,
-	                string: this.question.input
-	            });
-	            this.question.input = '';
-	            this.matchtests();
-	        }
-	        else {
-	            this.question.matches.push({
-	                type: this.question.type,
-	                string: this.question.input.toLowerCase()
-	            });
-	            this.question.input = '';
-	            this.matchtests();
-	        }
-	        this.errorMessage = '';
-	    };
-	    ExactQuestionNewView.prototype.removeQuestion = function (q) {
-	        var index = Utils.indexofObjArray(this.question.matches, 'string', q.string);
-	        this.question.matches.splice(index, 1);
-	        this.matchtests();
-	    };
-	    ExactQuestionNewView.prototype.addTestQuestion = function () {
-	        if (this.testInput.lastIndexOf('?') == this.testInput.length - 1) {
-	            this.testInput = this.testInput.substring(0, this.testInput.length - 1);
-	        }
-	        if (Utils.indexofObjArray(this.testQuestions, 'string', this.testInput) > -1) {
-	            return;
-	        }
-	        this.testQuestions.push({
-	            matched: false,
-	            string: this.testInput
-	        });
-	        this.matchtests();
-	        this.testInput = '';
-	    };
-	    ExactQuestionNewView.prototype.removeTestQuestion = function (q) {
-	        var index = Utils.indexofObjArray(this.testQuestions, 'string', q.string);
-	        this.testQuestions.splice(index, 1);
-	    };
-	    ExactQuestionNewView.prototype.matchtests = function () {
-	        for (var i = 0; i < this.testQuestions.length; i++) {
-	            this.matchQuestion(this.testQuestions[i]);
-	        }
-	    };
-	    ExactQuestionNewView.prototype.matchQuestion = function (q) {
-	        q.matched = false;
-	        for (var i = 0; i < this.question.matches.length; i++) {
-	            var match = this.question.matches[i];
-	            if (match.type == 'dynamic') {
-	                var m = this.matchRegex(match.string, q.string);
-	                console.log(match);
-	                console.log(q.string);
-	                if (m && m[0] == q.string) {
-	                    q.matched = true;
-	                }
-	            }
-	            else {
-	                if (match.string == q.string.toLowerCase())
-	                    q.matched = true;
-	            }
-	        }
-	    };
-	    ExactQuestionNewView.prototype.matchRegex = function (r, str) {
-	        return new RegExp(r, 'i').exec(str);
-	    };
-	    ExactQuestionNewView.prototype.infoclick = function () {
-	        this.sdInfoOpen = true;
-	        this.$nextTick(function () {
-	            var offset = $("#sdinfo").offset();
-	            $("html,body").animate({
-	                scrollTop: offset.top,
-	                scrollLeft: offset.left
-	            });
-	        });
-	    };
-	    ExactQuestionNewView.prototype.testRegex = function (s) {
-	        try {
-	            var re = new RegExp(s, 'i');
-	        }
-	        catch (e) {
-	            return e;
-	        }
-	    };
-	    ExactQuestionNewView = __decorate([
-	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(167),
-	            style: __webpack_require__(168)
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], ExactQuestionNewView);
-	    return ExactQuestionNewView;
-	}(Vue));
-	exports.ExactQuestionNewView = ExactQuestionNewView;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
-
-/***/ },
-/* 166 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function indexofObjArray(arr, prop, val) {
-	    for (var i = 0; i < arr.length; i++) {
-	        if (arr[i][prop] == val) {
-	            return i;
-	        }
-	    }
-	    return -1;
-	}
-	exports.indexofObjArray = indexofObjArray;
-
-
-/***/ },
-/* 167 */
-/***/ function(module, exports) {
-
-	module.exports = "<div id=\"ccb-new-exact-question-container\">\r\n    <h3>New Exact Question</h3>\r\n    \r\n    <div class=\"h-sep\"></div>\r\n    \r\n    <label>Question Name</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"name\"\r\n    >\r\n    \r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Question</label>&nbsp;&nbsp;&nbsp;\r\n    <div class=\"well bg-lightgray-dark\">\r\n        <span>\r\n            <strong>Add Match</strong>&nbsp;&nbsp;Type:\r\n            <button-toggler\r\n                :options=\"['static', 'dynamic']\"\r\n                value-model=\"question.type\"\r\n            ></button-toggler>\r\n            <tool-tipz v-on:click=\"infoclick()\">\r\n                <span slot=\"hover\"><i class=\"fa fa-question type-tooltip\"></i></span>\r\n                <span slot=\"content\">\r\n                    click to learn more about question matching\r\n                </span>\r\n            </tool-tipz>\r\n        </span>\r\n        <div v-if=\"errorMessage != ''\" class=\"match-error\">\r\n            <div class=\"h-margin-sm\"></div>\r\n            <div class=\"alert alert-danger\">\r\n              <button type=\"button\" class=\"close\" v-on:click=\"errorMessage = ''\"><i class=\"fa fa-times\"></i></button>\r\n              <strong>Error: </strong> {{errorMessage}}\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <div class=\"input-group alias-input\">\r\n            <input v-model:bind=\"question.input\" v-on:keyup.enter=\"addQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add an question match\">\r\n            <div class=\"input-group-btn\">\r\n                <button v-on:click=\"addQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n            </div>\r\n        </div>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <strong v-if=\"question.matches.length > 0\">Matches</strong>\r\n        <div class=\"h-margin-sm\"></div>\r\n        <ul class=\"list-group q-list\">\r\n            <li v-for=\"q in question.matches\" class=\"list-group-item\">\r\n                <table class=\"q-content\">\r\n                    <tr>\r\n                        <td>{{q.string}}?</td>\r\n                        <td class=\"q-type\">{{q.type}}</td>\r\n                        <td class=\"q-remove\"><i v-on:click=\"removeQuestion(q)\" class=\"fa fa-times\"></i></td>\r\n                    </tr>\r\n                </table>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"h-margin\"></div>\r\n    <toggle-panel\r\n        body-bg=\"bg-lightgray-dark\"\r\n    >\r\n        <strong slot=\"title\">Test Questions</strong>\r\n        <div slot=\"body\">\r\n            <div class=\"test-body\">\r\n                <div class=\"input-group\">\r\n                    <input v-model:bind=\"testInput\" v-on:keyup.enter=\"addTestQuestion()\" type=\"text\" class=\"form-control\" placeholder=\"add a test question\">\r\n                    <div class=\"input-group-btn\">\r\n                        <button v-on:click=\"addTestQuestion()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i></button>\r\n                    </div>\r\n                </div>\r\n                <div class=\"h-margin-sm\"></div>\r\n                <ul class=\"list-group q-list test-question-list\">\r\n                    <li v-for=\"q in testQuestions\" class=\"list-group-item font-darkgray-dark {{q.matched ? 'list-group-item-success' : 'bg-grapefruit-light'}}\">\r\n                        <table class=\"q-content\">\r\n                            <tr>\r\n                                <td>{{q.string}}?</td>\r\n                                <td class=\"q-remove\"><i v-on:click=\"removeTestQuestion(q)\" class=\"fa fa-times\"></i></td>\r\n                            </tr>\r\n                        </table>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </toggle-panel>\r\n    <div class=\"h-margin\"></div>\r\n    \r\n    <label>Response</label>\r\n    <!--v-focus-model=\"focused\"-->\r\n    <input\r\n        type=\"text\"\r\n        class=\"form-control\"\r\n        placeholder=\"question response\"\r\n    >\r\n    <div class=\"h-margin\"></div>\r\n    <div v-show=\"sdInfoOpen\" id=\"sdinfo\">\r\n        <div class=\"well bg-lightgray-dark\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-6\">\r\n                    <h4>Matching Info</h4>\r\n                </div>\r\n                <div class=\"col-xs-6\">\r\n                    <span v-on:click=\"sdInfoOpen = false\" class=\"info-close\">close <i class=\"fa fa-times\"></i></span>\r\n                </div>\r\n            </div>\r\n            <label>Matches</label>\r\n            <p>Matches are what determines if the user asked this specific question or not. Since ther are many ways to ask the same question; here, we have many ways to match a specific question. When a question is asked, the bot will check if it matches any of the question-matches set above, if it does, then it will reply with the given response</p>\r\n            <label>Static</label>\r\n            <p>A static match is just exact words. I will compare the question with the match ignoring both the case (capitalisation) and the questionmark. If the question matches exactly the match, it will reply with the response.</p>\r\n            <p>Example: 'What is my name?' will match:</p>\r\n            <ul>\r\n                <li>'what is my name?'</li>\r\n                <li>'What IS MY NaMe'</li>\r\n            </ul>\r\n            <label>Dynamic</label>\r\n            <p>Dynamic matches use Regular Expressions to match question, which means that you can put symbols in the match and create complex behaviours</p>\r\n            <p>Some Useful constructs:</p>\r\n            <ul>\r\n                <li><strong>(one|other)</strong> - will match either 'one' or 'other' in the place where it is set</li>\r\n                Example: 'Can i drink (soda|beer|maple syrup)' will match:\r\n                <ul>\r\n                    <li>can i drink beer</li>\r\n                    <li>Can i drink SODA?</li>\r\n                    <li>Can i drink maple syrup</li>\r\n                </ul>\r\n                <li><strong><strong>.*</strong></strong> - will match any number of characters</li>\r\n                Example: 'Is beachday .* fun?' will match:\r\n                <ul>\r\n                    <li>is beachday super fun</li>\r\n                    <li>is beachday super duper fun</li>\r\n                <strong>But Not</strong>\r\n                    <li>is beachday fun</li>\r\n                        this is because it expects two spaces around the '.*', removing one of the spaces in the match would make it work with the above example\r\n                </ul>\r\n                '.*hello.*' will match anything that contains 'hello'\r\n            </ul>\r\n            <p>Click <a href=\"http://www.zytrax.com/tech/web/regex.htm#search\">here</a> for a full guide on regular expressions</p>\r\n            <p>Or <a href=\"https://www.cheatography.com/davechild/cheat-sheets/regular-expressions/\">here</a> for a regular expression cheat sheet</p>\r\n\r\n            <strong>WARNING</strong>\r\n            <p>Regular expressions are very powerful, but also quite difficult to master, be very careful when using the '*' quantifier, it will open the possibility of matching a large ammout of questions. For example, if you put '.*' as a match, literally any sequence of character will match to it. This will make it so that none of the data object will ever be matched.</p>\r\n        </div>\r\n    </div>\r\n</div>"
-
-/***/ },
-/* 168 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(169);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(17)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./exact_question_new.scss", function() {
-				var newContent = require("!!./../../../../../node_modules/css-loader/index.js!./../../../../../node_modules/sass-loader/index.js!./exact_question_new.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "#ccb-new-exact-question-container .q-list {\n  margin-bottom: 0; }\n  #ccb-new-exact-question-container .q-list .q-content {\n    width: 100%; }\n    #ccb-new-exact-question-container .q-list .q-content .q-type {\n      text-align: right;\n      color: #CCD1D9; }\n    #ccb-new-exact-question-container .q-list .q-content .q-remove {\n      text-align: right; }\n      #ccb-new-exact-question-container .q-list .q-content .q-remove i {\n        color: #CCD1D9; }\n        #ccb-new-exact-question-container .q-list .q-content .q-remove i:hover {\n          color: #ED5565; }\n\n#ccb-new-exact-question-container .type-tooltip {\n  background-color: #AAB2BD;\n  border-radius: 100px;\n  padding: 2px 5px; }\n\n#ccb-new-exact-question-container .test-body {\n  margin-top: -15px; }\n\n#ccb-new-exact-question-container #sdinfo h4 {\n  margin: 0;\n  margin-bottom: 5px; }\n\n#ccb-new-exact-question-container #sdinfo .info-close {\n  float: right; }\n  #ccb-new-exact-question-container #sdinfo .info-close:hover {\n    color: #ED5565;\n    cursor: pointer; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Vue) {"use strict";
@@ -43413,7 +42199,7 @@ webpackJsonp([0,1],[
 	    }
 	    NotFoundView = __decorate([
 	        vue_typescript_1.VueComponent({
-	            template: __webpack_require__(171)
+	            template: __webpack_require__(146)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], NotFoundView);
@@ -43424,7 +42210,7 @@ webpackJsonp([0,1],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 171 */
+/* 146 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>This part of the website is not built yet</h3>"
