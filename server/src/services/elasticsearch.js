@@ -36,10 +36,12 @@ function resetIndex(indexName, callback) {
 }
 exports.resetIndex = resetIndex;
 function setIndexMapping(index, callback) {
+    console.log('resetting index');
     exports.elasticsearch.indices.exists({
         index: index
     }).then(function (res) {
         if (!res) {
+            console.log('setting mapping');
             exports.elasticsearch.indices.create({
                 index: index
             }).then(function (value) {
