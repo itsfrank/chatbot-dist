@@ -8,8 +8,6 @@ var Metrics = require('./services/metrics');
 var database_1 = require('./services/database');
 var routes_1 = require('./routes');
 var words_1 = require('./services/words');
-var mongo_express = require('mongo-express/lib/middleware');
-var mongo_express_config = require('./mongo-config.js');
 var config_1 = require('./config');
 var app = express();
 var env = process.env.CCBOT_ENV;
@@ -19,10 +17,6 @@ if (!configs) {
     configs = config_1.Config['production'];
 }
 var mongo_password = configs.mongo.password;
-if (mongo_password && mongo_password.indexOf('::') > -1) {
-    var env_var = mongo_password.split('::')[1];
-    mongo_express = process.env[env_var];
-}
 // const db:string =process.env.CCBOT_DB;
 // const host:string = process.env.CCBOT_HOST; //'159.203.32.219'
 // const port:number = process.env.CCBOT_PORT;
