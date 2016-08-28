@@ -69,7 +69,7 @@ function setIndexMapping(index, callback) {
 function prepareIndices(callback) {
     Utils.forAsync(Faculties.facultyList.length, function (index, done) {
         var faculty = Faculties.facultyList[index];
-        setIndexMapping(faculty);
+        setIndexMapping(faculty, done);
     }, function (aborted) { callback(); });
 }
 exports.prepareIndices = prepareIndices;

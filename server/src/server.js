@@ -7,7 +7,6 @@ var elasticsearch = require('./services/elasticsearch');
 var Metrics = require('./services/metrics');
 var database_1 = require('./services/database');
 var routes_1 = require('./routes');
-var words_1 = require('./services/words');
 var config_1 = require('./config');
 var app = express();
 var env = process.env.CCBOT_ENV;
@@ -43,7 +42,6 @@ var router = express.Router();
 //Add routes to app
 routes_1.RouteBinder.bind(router);
 app.use('/cbot', router);
-words_1.WordsService.reloadWords();
 var server = app.listen(configs.server.port, function () {
     console.log('Listening on port ' + configs.server.port);
 });
