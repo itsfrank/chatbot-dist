@@ -52,6 +52,7 @@ function deleteEmergencyNumber(req, res) {
 function postEmergencyNumber(req, res) {
     var fac = Faculties.requestFaculty(req);
     req.body.faculty = fac;
+    console.log(fac);
     new emergency_numbers_1.EmergencyNumbers(req.body).save();
     res.status(200).send();
 }
