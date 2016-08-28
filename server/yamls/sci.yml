@@ -24,7 +24,7 @@
     response: "Opening ceremonies start at 4:30pm, at the Tomlinson Fieldhouse. Please come to the entrance nearest Molson Stadium. Have fun!"
 
 "42 Wallaby Way":
-    keywords: ["Club", "Soda", "42", "Wallaby, "Way", "ages", "Wednesday"]
+    keywords: ["Club", "Soda", "42", "Wallaby", "Way", "ages", "Wednesday"]
     questions:
         - "What is the wednesday night event?"
         - "When does 42 Wallaby Way start?"
