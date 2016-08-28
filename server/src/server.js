@@ -30,6 +30,7 @@ if (mongo_password && mongo_password.indexOf('::') > -1) {
 // const password:string = process.env.CCBOT_PWD;
 database_1.Database.connect(configs.mongo.host, configs.mongo.port, configs.mongo.database, configs.mongo.username, mongo_password, {}, function () {
     Metrics.initMetrics();
+    console.log('mongo connected');
 });
 elasticsearch.connect(configs.elasticsearch.host, configs.elasticsearch.port, configs.elasticsearch.loglevel);
 elasticsearch.pingWait(function () {
