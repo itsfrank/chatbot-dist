@@ -1,8 +1,8 @@
 "use strict";
 var elasticsearch_1 = require('../services/elasticsearch');
-var Faculties = require('../services/faculties');
 var Utils = require('../services/utils');
 var Questions = require('../services/questions');
+var Faculties = require('../services/faculties');
 var QuestionRoutes = (function () {
     function QuestionRoutes() {
     }
