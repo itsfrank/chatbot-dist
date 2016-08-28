@@ -53,7 +53,7 @@ exports.Config = {
         },
         mongo: {
             database: 'ccdb-dev',
-            host: 'localhost',
+            host: '127.0.0.1',
             port: 27017,
             username: 'ccbot69',
             password: 'devpass'
@@ -70,10 +70,8 @@ exports.Config = {
         },
         mongo: {
             database: 'ccdb',
-            host: 'localhost',
+            host: '127.0.0.1',
             port: 27017,
-            username: 'ccbot69',
-            password: 'ENV::CCBOT_DB_PWD'
         },
         elasticsearch: {
             host: 'localhost',
