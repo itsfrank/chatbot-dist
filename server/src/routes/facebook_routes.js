@@ -113,6 +113,7 @@ function sendTextMessage(faculty, recipientId, messageText) {
     });
 }
 function callSendAPI(faculty, messageData) {
+	console.log(faculty);
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: page_tokens[faculty] },
