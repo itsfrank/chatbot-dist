@@ -19,8 +19,8 @@ var VALIDATION_TOKEN = 'fb_licorne_webhook';
 var PAGE_TOKEN = 'EAAXBClPmZCXABAE0UAZBwkrJL0MtCVvDRaADfId0WH7bwKcjkp5t2xrxCKPaDcu7OcwWAcElrFiPSjMJ9GbX8erzkQmTbpUD84bjMAPc6PfZCNmf2Y6W3xbL6mxgRvkoKFkWRUBHoYmpprzs4weBsRAcwsMbFw6qMBAZAkAZB3QZDZD';
 
 var page_tokens = {
-	'mgmt': "EAAXBClPmZCXABABFOSglAmfRQqr2qBtY64fgcT5mKKTvYk26YcEIotegS0lzgzesXzYqvyXJVvlB7tHeh4xcDpkZBdcMhqD2oI358eJz3Yps0nTVH1urhk1N73nTFS2c4WBIoNgwMgmAahgKai0sjaxZC9WPv9rvPe5SlQtgQZDZD",
-	'sci': "EAAXBClPmZCXABAE1rhbNbYwNLbDjtcWZBoGKPnVZAP8qCy6sjQaiZAYD9o4ZA7qYs0KxwsMnDqiRGZANnB4Sk3huQ1D2KAVODNyhq9beE0PQfhP0rmzcLZAZCaZAbu4IFmaUmwzrRM7WIZAYBZCMpN0SGqHyzZCMdWkLRA2mzsumWCCmZBgZDZD"
+	'mgmt': "EAAXBClPmZCXABAKdcFF5aScb7GOUzq5et6E2occwYipIkHAlTLJ3kxWmo4tYAzXuDJSGv3cqnu9OlRazdDJl9UwRtr279Yl51G8Srr3TmZBWvsp0dvkoZBuvcHzpgh49pZBn1dBJVUaN6XGWqb3QEKya4LYKb3WPztb313uUTgZDZD",
+	'sci': "EAAXBClPmZCXABAAiEWBMoiawcPhYWkrqiupFya0Q3sQUFjVeZAZAGqfZBzW3oDJBtONC8M53FFZAKrlYhLQD4lfAdDT6z4rRiZC4tKU7asuSEIMlFKUlgk6XJfoKX7cYPScWnOfRtMFgMIPqUttXwY9TiO5NGI2rpfuwNIsmPoNgZDZD"
 }
 
 function webhook(req, res) {
@@ -113,7 +113,7 @@ function sendTextMessage(faculty, recipientId, messageText) {
     });
 }
 function callSendAPI(faculty, messageData) {
-	console.log(faculty);
+	console.log(page_tokens[faculty]);
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: page_tokens[faculty] },
