@@ -17,6 +17,12 @@ var FacebookRoutes = (function () {
 exports.FacebookRoutes = FacebookRoutes;
 var VALIDATION_TOKEN = 'fb_licorne_webhook';
 var PAGE_TOKEN = 'EAAXBClPmZCXABAE0UAZBwkrJL0MtCVvDRaADfId0WH7bwKcjkp5t2xrxCKPaDcu7OcwWAcElrFiPSjMJ9GbX8erzkQmTbpUD84bjMAPc6PfZCNmf2Y6W3xbL6mxgRvkoKFkWRUBHoYmpprzs4weBsRAcwsMbFw6qMBAZAkAZB3QZDZD';
+
+var page_tokens = {
+	'mgmt': "EAAXBClPmZCXABABFOSglAmfRQqr2qBtY64fgcT5mKKTvYk26YcEIotegS0lzgzesXzYqvyXJVvlB7tHeh4xcDpkZBdcMhqD2oI358eJz3Yps0nTVH1urhk1N73nTFS2c4WBIoNgwMgmAahgKai0sjaxZC9WPv9rvPe5SlQtgQZDZD",
+	'sci': "EAAXBClPmZCXABAE1rhbNbYwNLbDjtcWZBoGKPnVZAP8qCy6sjQaiZAYD9o4ZA7qYs0KxwsMnDqiRGZANnB4Sk3huQ1D2KAVODNyhq9beE0PQfhP0rmzcLZAZCaZAbu4IFmaUmwzrRM7WIZAYBZCMpN0SGqHyzZCMdWkLRA2mzsumWCCmZBgZDZD"
+}
+
 function webhook(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === VALIDATION_TOKEN) {
@@ -109,7 +115,7 @@ function sendTextMessage(faculty, recipientId, messageText) {
 function callSendAPI(faculty, messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: Faculties.FacultyMap.facebook.tokens[faculty] },
+        qs: { access_token: page_tokens[faculty] },
         method: 'POST',
         json: messageData
     }, function (error, response, body) {
